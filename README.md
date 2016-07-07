@@ -1,4 +1,4 @@
-# React Yum Yum App
+# React Yum App
 
 A minimal boilerplate required to test and experiment with React.
 
