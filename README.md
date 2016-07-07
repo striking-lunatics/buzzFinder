@@ -1,6 +1,6 @@
 # React Yum App
 
-A react app that helps you get great recipes and stay healthy! 
+A react app that helps you get great recipes and stay healthy!
 
 
 
@@ -10,7 +10,7 @@ A react app that helps you get great recipes and stay healthy!
 $ npm start
 ```
 
-Open your browser to ***http://localhost:8080*** to view.  Modify your React code in your editor, save your changes, and watch those changes automatically reflect in the browser! *(the power of webpack-dev-server)*# f
+Open your browser to ***http://localhost:8080*** to view.  
 
 ## Style Guides
 
