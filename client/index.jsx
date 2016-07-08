@@ -22,14 +22,19 @@ class App extends React.Component {
                     <AuthButton />
                     <div className="col-sm-offset-2 col-sm-8">
                         {/*{ Create search box and add two-way bindings }*/}
-                        <input value={this.state.term} onKeyPress={(e) => this.test(e)} onChange={(e) => this.setState({term: e.target.value})} type='text' className='form-control' placeholder='Search by zip code..'/>
+                        <form>
+                        <input value={this.state.term} onKeyPress={(e) => this.test(e)} onChange={(e) => this.setState({term: e.target.value})} type='text' className='form-control' placeholder='Search by city.....'/>
+                        <button onClick={(e) => e.preventDefault()}>Search</button>
                        here is our state: {this.state.term}
-
-                
+                        </form>
+                        <button onClick={() => alert('use the current location deal')}>Use current location</button>
                     </div>
                 </div>
             </div>
         );
+    }
+    test(e){
+        if (e.key==='Enter') alert('they pressed enter we will search by provided city'); 
     }
 }
 
