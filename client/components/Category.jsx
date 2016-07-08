@@ -8,6 +8,10 @@ export default class Category extends React.Component {
    }
 
    render() {
-      return ();
+      return (
+        <div>
+          
+        </div>
+      );
    }
 }

@@ -8,6 +8,8 @@ export default class CategoriesList extends React.Component {
    }
 
    render() {
-      return ();
+      return (
+        <div></div>
+      );
    }
 }
