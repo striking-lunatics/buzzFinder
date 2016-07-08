@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class Category extends React.Component {
+export default class BreweryDetail extends React.Component {
 
     constructor(props) {
         super(props);
