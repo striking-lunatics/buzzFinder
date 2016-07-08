@@ -5,15 +5,60 @@ import BreweryItem from './components/BreweryItem.jsx';
 // import {Button, Modal} from "react-bootstrap";
 import AuthButton from './components/AuthButton.jsx'
 
- 
+
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            term: ''
+            term: '',
+            breweryList: []
         }
+
     }
+
+
+
+
+    _getLocation() {
+            if ('geolocation' in navigator) {
+                this._requestLocation();
+            } else {
+                console.log("Browser doesn't support geolocation");
+            }
+        }
+
+    _requestLocation() {
+
+        const options = {
+            enableHighAccuracy: false,
+            timeout: 5000,
+            maximumAge: 0
+        };
+
+        navigator.geolocation.getCurrentPosition(this._success.bind(this), error, options);
+        const error = (err) => console.log('error ', err);
+    }
+
+
+    _success(pos) {
+        console.log("showing position on success:", pos);
+        // this.setState({latitude: pos.coords.latitude, longitude: pos.coords.longitude})
+        // $.ajax({
+        //     url: '/location',
+        //     type: 'POST',
+        //     contentType: 'application/json',
+        //     data: JSON.stringify({
+        //         latitude: this.state.latitude,
+        //         longitude: this.state.longitude
+        //     }),
+        //     dataType: 'json',
+        //     success: this._fetchBrewerysByLocation.bind(this)
+        // });
+    }
+
+
+
     render() {
         return (
             <div className="container App">
@@ -27,14 +72,14 @@ class App extends React.Component {
                         <button onClick={(e) => e.preventDefault()}>Search</button>
                        here is our state: {this.state.term}
                         </form>
-                        <button onClick={() => alert('use the current location deal')}>Use current location</button>
+                        <button onClick={() => this._getLocation()}>Use current location</button>
                     </div>
                 </div>
             </div>
         );
     }
     test(e){
-        if (e.key==='Enter') alert('they pressed enter we will search by provided city'); 
+        if (e.key==='Enter') alert('they pressed enter we will search by provided city');
     }
 }
 
