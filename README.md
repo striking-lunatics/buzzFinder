@@ -1,6 +1,6 @@
-# React Yum App
+# React buzzFinder App
 
-A react app that helps you get great recipes and stay healthy!
+A react app that helps you find great local beers and breweries!
 
 
 
