@@ -9,6 +9,10 @@ export default class AuthPanel extends React.Component {
    }
 
    render() {
-      return ();
+      return (
+        <div>
+          
+        </div>
+      );
    }
 }
