@@ -1,4 +1,5 @@
 //import * as Auth from '../models/auth';
+//import { Model } from 'react-bootstrap';
 import React from 'react';
 
 export default class AuthPanel extends React.Component {
@@ -11,7 +12,7 @@ export default class AuthPanel extends React.Component {
    render() {
       return (
         <div>
-          
+
         </div>
       );
    }
