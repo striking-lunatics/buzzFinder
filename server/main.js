@@ -15,15 +15,16 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const PORT = process.env.PORT || 1337;
+//const PORT = process.env.PORT || 1337;
+const PORT = 1337;
 
 app.set('port', PORT);
 
-app.use('/', express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
- extended: true
-}));
+// app.use('/', express.static(path.join(__dirname, 'public')));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({
+//  extended: true
+// }));
 
 // Additional middleware which will set headers that we need on each request.
 app.use(function(req, res, next) {
