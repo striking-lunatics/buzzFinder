@@ -13,9 +13,9 @@ $ npm start
 Open your browser to ***http://localhost:8080*** to view.  
 
 ## Style Guide
-Please reference ***https://github.com/airbnb/javascript*** for style. 
+Please reference ***https://github.com/airbnb/javascript*** for style.
 
-Orrrr we can add our own personal style guide. (that seems time consuming though.)
+Or we can add our own personal style guide. (that seems time consuming though.)
 ```
 Just some filler stuff for now. 
 ```
