@@ -95,7 +95,7 @@ class App extends React.Component {
                     <div className='col-sm-7 col-sm-offset-5'>
                         {/*{ Create search box and add two-way bindings }*/}
                         <form>
-                            <input className='input-lg' value={this.state.term} onKeyPress={(e) => this.test(e)} onChange={(e) => this.setState({term: e.target.value})} type='text' className='form-control' placeholder='Search by city.....'/>
+                            <input className='input-large form-control' value={this.state.term} onKeyPress={(e) => this.test(e)} onChange={(e) => this.setState({term: e.target.value})} type='text'  placeholder='Search by city.....'/>
                             <div className='btn-group' role='group'>
                                 <button type='button' className='btn btn-primary' onClick={(e) => e.preventDefault()}> Search </button>
                                 {/*here is our state (test): {this.state.term}*/}

@@ -1,3 +1,10 @@
+/***************/
+/***************/
+/* GENERAL */
+/***************/
+/***************/
+
+
 body { 
   background: url('beerbg.jpg') no-repeat center center fixed; 
   -webkit-background-size: cover;
@@ -11,27 +18,86 @@ body {
   /*margin: 20px;*/
 }
 
+
+/***************/
+/***************/
+/* HEADER */
+/***************/
+/***************/
+
 .heading {
 	margin-top: 40px;
 	font-family: 'Arvo', serif;
 }
 
-h1 {
+.heading h1 {
 	font-size: 3.2em;
 	color: #efefef;	
 	margin-top: -3px;
 }
 
-h4 {
+.heading h4 {
 	font-size: 1.8em;
 	color: #ccc;
 }
 
 .modal-container {
   position: relative;
+  margin-bottom: 160px;
 }
 
-input {
+
+
+/***************/
+/***************/
+/* FORM */
+/***************/
+/***************/
+
+form {
+	padding: 10px;
+}
+
+.input-large {
 	margin-bottom: 15px;
+	font-size: 16px;
+	height: 40px;
+}
+
+.btn-group .btn{
+	font-size: 16px;
+}
+
+/***************/
+/***************/
+/* MEDIA QUERY: Small Devices, Tablets */
+/***************/
+/***************/
+
+
+@media only screen and (max-width : 768px) {
+
+	body { 
+	  background: url('beerbg-sm.jpg') no-repeat center bottom fixed; 
+	  background-color: black; 
+	}
+
+	.container {
+		/*background: rgba(0,0,0,0.7);*/
+	}
+
+	.heading h1 {
+		margin-top: 0;
+	}
+
+	.heading h4 {
+		font-size: 1.8em;
+		color: #ccc;
+	}
+
+	.modal-container {
+	  margin-bottom: 40px;
+	}
+
 }
 
