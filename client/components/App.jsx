@@ -87,7 +87,6 @@ export default class App extends React.Component {
                      </div>
                   </form>
                   <BreweryList/>
-                  <h1>List Here</h1>
                </div>
             </div>
          </div>
