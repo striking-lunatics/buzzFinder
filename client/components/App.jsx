@@ -10,7 +10,7 @@ export default class App extends React.Component {
       super(props);
       this.state = {
          term: '',
-         breweryList: [],
+         brewerys: [],
          latitude: 0,
          longitude: 0
       }
@@ -55,10 +55,10 @@ export default class App extends React.Component {
 
    // setState with brewery data
    _fetchBrewerysByLocation(brewerys) {
-      this.setState({breweryList: brewerys.data});
+      this.setState({brewerys: brewerys.data});
       console.log(" brewerys.data", brewerys.data)
       // we now can use this data in the child components
-      // this.props.breweryList
+      // this.props.brewerys
    }
 
    render() {

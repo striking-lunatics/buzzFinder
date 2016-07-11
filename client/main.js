@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 
 // Import parent app component
-import App from './components/index.jsx';
+import App from './components/App.jsx';
 
 // Render that component to the DOM!
 ReactDOM.render( < App / > , document.getElementById('app'));
