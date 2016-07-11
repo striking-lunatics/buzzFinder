@@ -9,7 +9,7 @@ A react app that helps you find great local beers and breweries!
 $ npm start
 ```
 
-Open your browser to ***http://localhost:8080*** to view.  
+Open your browser to ***http://localhost:1337*** to view.  
 
 ## Style Guide
 Please reference ***https://github.com/airbnb/javascript*** for style.
