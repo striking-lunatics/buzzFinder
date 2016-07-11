@@ -11,29 +11,27 @@ export default class AuthPanel extends React.Component {
 
    render() {
       return (
-        <div>
-        <p>Please enter your username and password</p>
-        <form>
-          <input
-            className='input-large form-control'
-            value={this.state.username}
-            placeholder="Username..."
-            onChange={(e) => this.setState({username:e.target.value})} 
-           />
-          <input
-            className='input-large form-control'
-            value={this.state.password}
-            placeholder='Password...'
-            onChange={(e) => this.setState({password:e.target.value})}
-           />
-           
-           {/*uN:{this.state.username}
-            pW:{this.state.password}*/}
+        <div>      
+          <form>
+            <input
+              className='input-large form-control'
+              value={this.state.username}
+              placeholder="Username..."
+              onChange={(e) => this.setState({username:e.target.value})} 
+             />
+            <input
+              className='input-large form-control'
+              value={this.state.password}
+              placeholder='Password...'
+              onChange={(e) => this.setState({password:e.target.value})}
+             />
+             
+             {/*uN:{this.state.username}
+              pW:{this.state.password}*/}
 
-          <button type='button' className='btn btn-primary'>Submit</button>
+            <button type='button' className='btn btn-primary'>Submit</button>
           </form>
         </div>
-
       );
    }
 }

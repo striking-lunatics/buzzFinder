@@ -14,10 +14,6 @@ body {
   font-family: 'Oswald', sans-serif;
 }
 
-.container {
-  /*margin: 20px;*/
-}
-
 
 /***************/
 /***************/
@@ -68,10 +64,6 @@ form {
 	font-size: 16px;
 }
 
-.modal-content {
-	
-}
-
 .modal-content .modal-title{
 	color: #337ab7;
 }
@@ -83,10 +75,12 @@ form {
 .signUpForm {
 	margin-bottom: 0;
 }
+
 .signUpForm h5{
  	display: inline-block;
  	margin-right: 1em;
 }
+
 
 
 /***************/
@@ -101,10 +95,6 @@ form {
 	body { 
 	  background: url('beerbg-sm.jpg') no-repeat center bottom fixed; 
 	  background-color: black; 
-	}
-
-	.container {
-		/*background: rgba(0,0,0,0.7);*/
 	}
 
 	.heading h1 {
