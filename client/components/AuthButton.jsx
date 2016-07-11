@@ -19,9 +19,9 @@ export default class AuthButton extends React.Component {
       return (
          <div className="modal-container col-sm-4">
             {/* Login/ Join button on main page */}
-            <Button type='button' className='btn btn-primary btn-lg' onClick={() => this.setState({show: true})}>
+            <button type='button' className='btn btn-primary btn-lg' onClick={() => this.setState({show: true})}>
                Login / Join
-            </Button>
+            </button>
             <Modal show={this.state.show} onHide={close} container={this} aria-labelledby="contained-modal-title">
                {/* Login panel */}
                <Modal.Header closeButton>
@@ -32,7 +32,7 @@ export default class AuthButton extends React.Component {
                   <SignUp closeLoginPanel= {() => this.setState({ show: false})}/>
                </Modal.Body>
                <Modal.Footer>
-                  <Button type='button' className='btn btn-primary' onClick={close}>Close</Button>
+                  <button type='button' className='btn btn-primary' onClick={close}>Close</button>
                </Modal.Footer>
             </Modal>
          </div>
@@ -61,7 +61,7 @@ class SignUp extends React.Component {
                   <h5>
                      Don't have an account?
                   </h5>
-                  <Button type='button' className='btn btn-primary' onClick={() => {
+                  <button type='button' className='btn btn-primary' onClick={() => {
                      {/*TO FIX: want to close login panel when signup form shows up*/
                      }
                      {/*this.props.closeLoginPanel();*/
@@ -69,7 +69,7 @@ class SignUp extends React.Component {
                      this.setState({show: true});
                   }}>
                      Sign Up!
-                  </Button>
+                  </button>
                </div>
             </div>
             <Modal show={this.state.show} onHide={close} container={this} aria-labelledby="contained-modal-title">
@@ -81,7 +81,7 @@ class SignUp extends React.Component {
                   <AuthPanel/>
                </Modal.Body>
                <Modal.Footer>
-                  <Button type='button' className='btn btn-primary' onClick={close}>Close</Button>
+                  <button type='button' className='btn btn-primary' onClick={close}>Close</button>
                </Modal.Footer>
             </Modal>
          </div>

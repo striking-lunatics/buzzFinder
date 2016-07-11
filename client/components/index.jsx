@@ -54,7 +54,7 @@ export default class App extends React.Component {
          dataType: 'json',
          success: this._fetchBrewerysByLocation.bind(this)
       });
-      // fetch('http://localhost:8080/location', {
+      // fetch('http://localhost:1337/location', {
       //     method: "POST",
       //     body: JSON.stringify({latitude: this.state.latitude, longitude: this.state.longitude}),
       //     headers: {
