@@ -9,10 +9,12 @@ export default class BreweryItem extends React.Component {
 
    render() {
       return (
-         <div className='col-sm-8'>
-            <h1>Local Craft Brews</h1>
-            <h4>The Only Source for Craft Beer</h4>
-         </div>
+        <div className="list-group breweryList">
+           <a className="list-group-item" href="#">
+              {this.props.name}
+              <span className="distance pull-right">{`${this.props.distance} miles`}</span>
+           </a>
+        </div>
       );
    }
 }

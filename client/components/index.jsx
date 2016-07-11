@@ -1,11 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import BreweryItem from './BreweryItem.jsx';
+import BreweryList from './BreweryList.jsx';
 import fetch from 'isomorphic-fetch';
 import $ from 'jquery';
-
-//import {Button,Modal,Popover,} from 'react-bootstrap';
-// import {Button, Modal} from "react-bootstrap";
 import AuthButton from './AuthButton.jsx'
 
 export default class App extends React.Component {
@@ -54,20 +51,6 @@ export default class App extends React.Component {
          dataType: 'json',
          success: this._fetchBrewerysByLocation.bind(this)
       });
-      // fetch('http://localhost:1337/location', {
-      //     method: "POST",
-      //     body: JSON.stringify({latitude: this.state.latitude, longitude: this.state.longitude}),
-      //     headers: {
-      //         "Content-Type": "application/json"
-      //     },
-      //     credentials: "same-origin"
-      // }).then(function(response) {
-      //     console.log(response);
-      //
-      //     response.text().then(function(responseText) {})
-      // }, function(error) {
-      //     error.message //=> String
-      // })
    }
 
    // setState with brewery data
@@ -83,7 +66,10 @@ export default class App extends React.Component {
          <div className="container App">
             <div className="row">
                <div className='col-sm-7 col-sm-offset-5 heading'>
-                  <BreweryItem/>
+               <div className='col-sm-8'>
+               <h1>Local Craft Brews</h1>
+               <h4>The Only Source for Craft Beer</h4>
+               </div>
                   <AuthButton/>
                </div>
             </div>
@@ -100,7 +86,8 @@ export default class App extends React.Component {
                         <button type='button' className='btn btn-primary' onClick={() => this._getLocation()}>Use current location</button>
                      </div>
                   </form>
-
+                  <BreweryList/>
+                  <h1>List Here</h1>
                </div>
             </div>
          </div>
@@ -111,6 +98,3 @@ export default class App extends React.Component {
          alert('they pressed enter we will search by provided city');
       }
    }
-
-// ReactDOM.render(
-//     <App/>, document.getElementById('root'));
