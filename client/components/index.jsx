@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import BreweryItem from './components/BreweryItem.jsx';
+import BreweryItem from './BreweryItem.jsx';
 import fetch from 'isomorphic-fetch';
 import $ from 'jquery';
 
 //import {Button,Modal,Popover,} from 'react-bootstrap';
 // import {Button, Modal} from "react-bootstrap";
-import AuthButton from './components/AuthButton.jsx'
+import AuthButton from './AuthButton.jsx'
 
-class App extends React.Component {
+export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -114,5 +114,5 @@ class App extends React.Component {
         }
     }
 
-ReactDOM.render(
-    <App/>, document.getElementById('root'));
+// ReactDOM.render(
+//     <App/>, document.getElementById('root'));

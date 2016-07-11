@@ -1,11 +1,10 @@
-# React buzzFinder App
+# React Drink Local
 
 A react app that helps you find great local beers and breweries!
 
 
 
-## Run the dev server (webpack-dev-server)
-
+## Run App
 ```
 $ npm start
 ```
@@ -17,7 +16,7 @@ Please reference ***https://github.com/airbnb/javascript*** for style.
 
 Or we can add our own personal style guide. (that seems time consuming though.)
 ```
-Just some filler stuff for now. 
+Just some filler stuff for now.
 ```
 
 ## Contribution Guide
