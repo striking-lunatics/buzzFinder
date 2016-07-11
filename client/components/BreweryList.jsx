@@ -55,7 +55,7 @@ export default class BreweryList extends React.Component {
    _createBreweryComponents() {
       if (this.state.brewerys) {
          return this.state.brewerys.filter((beer) => beer.streetAddress && beer.openToPublic == "Y" && beer.locationType != "office" && beer.brewery.images).map((beer, index) => {
-            return <BreweryItem key={index} name={beer.brewery.name} address={beer.streetAddress} zipcode={beer.postalCode} distance={beer.distance} type={beer.locationType} icon={beer.brewery.images.icon}/>
+            return <BreweryItem key={index} url={beer.brewery.website} name={beer.brewery.name} address={beer.streetAddress} zipcode={beer.postalCode} distance={beer.distance} type={beer.locationType} icon={beer.brewery.images.icon}/>
          });
       } else {
          return <h2>Loading...</h2>
