@@ -29,7 +29,7 @@ app.use(function(req, res, next) {
 
 app.post('/location', function(req, res) {
   // POST http://localhost:1337/location 500 (Internal Server Error)
-  console.log('should be location data',res.body)
+  console.log('should be location data', res.body)
   //  const URL = `http://api.brewerydb.com/v2/search/geo/point?radius=100&lat=${req.body.latitude}&lng=${req.body.longitude}&key=${API}`;
   //  console.log(req.body.latitude, req.body.longitude)
    //
