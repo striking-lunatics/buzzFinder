@@ -68,6 +68,27 @@ form {
 	font-size: 16px;
 }
 
+.modal-content {
+	
+}
+
+.modal-content .modal-title{
+	color: #337ab7;
+}
+
+.modal-content input {
+	margin-right: 1em;
+}
+
+.signUpForm {
+	margin-bottom: 0;
+}
+.signUpForm h5{
+ 	display: inline-block;
+ 	margin-right: 1em;
+}
+
+
 /***************/
 /***************/
 /* MEDIA QUERY: Small Devices, Tablets */

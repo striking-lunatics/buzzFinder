@@ -32,11 +32,12 @@ import AuthPanel from './AuthPanel.jsx';
           </Modal.Header>
           <Modal.Body>
            <AuthPanel />
-           Don't have an account?
+           
            <SignUp />
           </Modal.Body>
+
           <Modal.Footer>
-            <Button onClick={close}>Close</Button>
+            <Button type='button' className='btn btn-primary' onClick={close}>Close</Button>
           </Modal.Footer>
         </Modal>
       </div>
@@ -53,14 +54,19 @@ import AuthPanel from './AuthPanel.jsx';
     let close = () => this.setState({ show: false});
 
     return (
-      <div className="modal-container" style={{height: 200}}>
-        <Button
-          bsStyle="primary"
-          bsSize="large"
-          onClick={() => this.setState({ show: true})}
-        >
-         Sign Up!
-        </Button>
+      <div className="modal-container signUpForm">
+        <div className='row'>
+          <div className='col-sm-12'>
+            <h5> Don't have an account? </h5>
+            <Button 
+              type='button' 
+              className='btn btn-primary'
+              onClick={() => this.setState({ show: true})}
+            >
+             Sign Up!
+            </Button>
+          </div>
+        </div> 
 
         <Modal
           show={this.state.show}
@@ -75,7 +81,7 @@ import AuthPanel from './AuthPanel.jsx';
            <AuthPanel />
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={close}>Close</Button>
+            <Button type='button' className='btn btn-primary' onClick={close}>Close</Button>
           </Modal.Footer>
         </Modal>
       </div>
