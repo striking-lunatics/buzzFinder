@@ -12,7 +12,7 @@ import AuthPanel from './AuthPanel.jsx';
     let close = () => this.setState({ show: false});
 
     return (
-      <div className="modal-container" style={{height: 200}}>
+      <div className="modal-container col-sm-4" style={{height: 200}}>
         <Button
           bsStyle="primary"
           bsSize="large"
