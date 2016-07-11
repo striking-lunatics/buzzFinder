@@ -41,14 +41,14 @@ export default class BreweryList extends React.Component {
 
 
    _success(IP) {
-     const s = this;
+     const THIS = this;
      $.ajax({
         url: '/location',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify({latitude: IP.lat, longitude: IP.lon}),
         dataType: 'json',
-        success: (data) => s.setState({brewerys: brewerys.data})
+        success: (brewerys) => THIS.setState({brewerys: brewerys.data})
      });
    }
 
