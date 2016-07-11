@@ -1,5 +1,5 @@
 const request = require('request');
-const API = 'da506aecce47e548b1877f8c6f9be793'
+const API = 'da506aecce47e548b1877f8c6f9be793';
 fetchLocation()
 
 function fetchLocation() {
