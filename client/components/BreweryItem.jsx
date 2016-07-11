@@ -9,9 +9,9 @@ export default class BreweryItem extends React.Component {
 
    render() {
       return (
-        <div>
-          <h1 className='text-center'>Buzz Finder!</h1>
-          <h4 className='text-center'>Only the best</h4>
+        <div className='col-sm-8'>
+          <h1>Buzz Finder!</h1>
+          <h4>Only the best </h4>
         </div>
       );
    }

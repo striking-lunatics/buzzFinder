@@ -25,7 +25,7 @@ class App extends React.Component {
         if ('geolocation' in navigator) {
             this._requestLocation();
         } else {
-            console.log("Browser doesn't support geolocation");
+            console.log('Browser doesn't support geolocation');
         }
     }
 
@@ -84,16 +84,20 @@ class App extends React.Component {
 
     render() {
         return (
-            <div className="container App">
-                <div className="row">
-                    <BreweryItem/>
-                    <AuthButton/>
-                    <div className="col-sm-offset-2 col-sm-8">
+            <div className='container App'>
+                <div className='row'>
+                    <div className='col-md-6 col-md-offset-6'>
+                        <BreweryItem/>
+                        <AuthButton/>
+                    </div>  
+                </div>
+                <div className='row'>
+                    <div className='col-md-6 col-md-offset-6'>
                         {/*{ Create search box and add two-way bindings }*/}
                         <form>
                             <input value={this.state.term} onKeyPress={(e) => this.test(e)} onChange={(e) => this.setState({term: e.target.value})} type='text' className='form-control' placeholder='Search by city.....'/>
-                            <button onClick={(e) => e.preventDefault()}>Search</button>
-                            here is our state: {this.state.term}
+                            <button onClick={(e) => e.preventDefault()}>Search NOW!</button>
+                            // here is our state: {this.state.term}
                         </form>
                         <button onClick={() => this._getLocation()}>Use current location</button>
                     </div>

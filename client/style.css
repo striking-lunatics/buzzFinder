@@ -1,13 +1,37 @@
-body {
-	background-image: url('https://images8.alphacoders.com/413/413078.jpg');
-	background-size:100%;
+body { 
+  background: url('beerbg.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  font-family: 'Oswald', sans-serif;
 }
+
 .container {
-  margin: 20px;
+  /*margin: 20px;*/
 }
+
+.heading {
+	margin-top: 40px;
+	font-family: 'Arvo', serif;
+}
+
+h1 {
+	font-size: 3.2em;
+	color: #efefef;	
+	margin-top: -3px;
+}
+
+h4 {
+	font-size: 1.8em;
+	color: #ccc;
+}
+
 .modal-container {
   position: relative;
 }
-/*.modal-container .modal, .modal-container .modal-backdrop {
-  position: absolute;
-}*/
+
+input {
+	margin-bottom: 15px;
+}
+
