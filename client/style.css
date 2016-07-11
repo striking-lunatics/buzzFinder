@@ -43,6 +43,7 @@ body {
 
 .modal-container {
   position: relative;
+  margin-bottom: 160px;
 }
 
 
@@ -53,6 +54,10 @@ body {
 /***************/
 /***************/
 
+form {
+	padding: 10px;
+}
+
 .input-large {
 	margin-bottom: 15px;
 	font-size: 16px;
@@ -61,5 +66,38 @@ body {
 
 .btn-group .btn{
 	font-size: 16px;
+}
+
+/***************/
+/***************/
+/* MEDIA QUERY: Small Devices, Tablets */
+/***************/
+/***************/
+
+
+@media only screen and (max-width : 768px) {
+
+	body { 
+	  background: url('beerbg-sm.jpg') no-repeat center bottom fixed; 
+	  background-color: black; 
+	}
+
+	.container {
+		/*background: rgba(0,0,0,0.7);*/
+	}
+
+	.heading h1 {
+		margin-top: 0;
+	}
+
+	.heading h4 {
+		font-size: 1.8em;
+		color: #ccc;
+	}
+
+	.modal-container {
+	  margin-bottom: 40px;
+	}
+
 }
 
