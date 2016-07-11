@@ -1,3 +1,10 @@
+/***************/
+/***************/
+/* GENERAL */
+/***************/
+/***************/
+
+
 body { 
   background: url('beerbg.jpg') no-repeat center center fixed; 
   -webkit-background-size: cover;
@@ -11,18 +18,25 @@ body {
   /*margin: 20px;*/
 }
 
+
+/***************/
+/***************/
+/* HEADER */
+/***************/
+/***************/
+
 .heading {
 	margin-top: 40px;
 	font-family: 'Arvo', serif;
 }
 
-h1 {
+.heading h1 {
 	font-size: 3.2em;
 	color: #efefef;	
 	margin-top: -3px;
 }
 
-h4 {
+.heading h4 {
 	font-size: 1.8em;
 	color: #ccc;
 }
@@ -31,7 +45,21 @@ h4 {
   position: relative;
 }
 
-input {
+
+
+/***************/
+/***************/
+/* FORM */
+/***************/
+/***************/
+
+.input-large {
 	margin-bottom: 15px;
+	font-size: 16px;
+	height: 40px;
+}
+
+.btn-group .btn{
+	font-size: 16px;
 }
 
