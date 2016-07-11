@@ -73,6 +73,7 @@ export default class App extends React.Component {
    // setState with brewery data
    _fetchBrewerysByLocation(brewerys) {
       this.setState({breweryList: brewerys.data});
+      console.log(" brewerys.data", brewerys.data)
       // we now can use this data in the child components
       // this.props.breweryList
    }
