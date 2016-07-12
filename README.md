@@ -1,7 +1,13 @@
 # React Drink Local
 
 A react app that helps you find great local beers and breweries!
+Find pubs in your area
+### Features
 
+- Search from current location
+- Map directions
+- List of beers offered
+- Pub details
 
 
 ## Run App

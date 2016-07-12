@@ -1,16 +1,9 @@
 import React from 'react';
 import BreweryItem from './BreweryItem.jsx';
 import $ from 'jquery';
-//import App from './App.jsx';
 const request = require('request');
 
 export default class BreweryList extends React.Component {
-  //  constructor(props) {
-  //     super(props);
-  //     this.state = {
-  //        brewerys: null
-  //     }
-  //  }
 
    render() {
       return (
@@ -19,7 +12,6 @@ export default class BreweryList extends React.Component {
          </div>
       )
    }
-
 
    _createBreweryComponents() {
      //  map brewerys data -> create BreweryItem for each brewery
@@ -30,6 +22,5 @@ export default class BreweryList extends React.Component {
       } else {
          return <h2>Loading...</h2>
       }
-
    }
 }
