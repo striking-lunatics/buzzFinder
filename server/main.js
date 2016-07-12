@@ -38,8 +38,12 @@ app.use(function(req, res, next) {
 app.post('/location', function(req, res) {
 
    console.log(req.body.latitude, req.body.longitude)
+   // Get location results with social account information included.
+   // withSocialAccounts=Y
+   // Radius from point. Defaults to 10 miles.
+   // radius=30
 
-   const URL = `http://api.brewerydb.com/v2/search/geo/point?radius=100&lat=${req.body.latitude}&lng=${req.body.longitude}&key=${API}`;
+   const URL = `http://api.brewerydb.com/v2/search/geo/point?withSocialAccounts=Y&radius=30&lat=${req.body.latitude}&lng=${req.body.longitude}&key=${API}`;
 
    request(URL, function(error, response, body) {
       if (!error && response.statusCode == 200) {
