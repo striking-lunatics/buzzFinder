@@ -130,18 +130,16 @@ function fetchLocation() {
 // find brewerys based on city, state
 app.post('/city', function(req, res) {
 
-   const cityState = req.body.cityState.split(',');
-   const city = cityState[0];
-   const state = cityState[1];
+   var cityState = req.body.cityState.split(',');
+   var city = cityState[0];
+   var state = cityState[1];
    var lat = null;
    var long = null;
 
-
-   const geoURL = `http://maps.google.com/maps/api/geocode/json?address=+${city},+${state}&sensor=false`;
+   var geoURL = `http://maps.google.com/maps/api/geocode/json?address=+${city},+${state}&sensor=false`;
    request(geoURL, function(error, response, body) {
       if (!error && response.statusCode == 200) {
-         const data = JSON.parse(body);
-
+         var data = JSON.parse(body);
          lat = data.results[0].geometry.location.lat;
          long = data.results[0].geometry.location.lng;
       } else {
@@ -158,11 +156,13 @@ app.post('/city', function(req, res) {
 
          // this api call does not return distance
          // use helper function to calc and insert into object then send to client
-         const distance = getDistanceFromLatLonInKm(LOCATION.lat, LOCATION.long, lat, long);
-         console.log('distance ', distance);
+         let distanceKm = getDistanceFromLatLonInKm(LOCATION.lat, LOCATION.long, lat, long);
+         let distanceMiles = 0.62137 * distanceKm;
          // add distance data to all brewerys
-         //body.data.forEach(brewery => brewery.distance = distance);
-         res.send(JSON.parse(body));
+         var body = JSON.parse(body);
+         console.log('distance Miles: ', distanceMiles);
+         body.data.forEach(brewery => brewery.distance = Math.round(distanceMiles));
+         res.send(body);
 
       } else {
          console.log("error: ", error)
