@@ -98,7 +98,11 @@ app.post('/beer/brewery', function(req, res) {
 // find brewerys based on city, state
 app.post('/city', function(req, res) {
 
-   const URL = `http://api.brewerydb.com/v2/beer/${beerID}/breweries?key=${API}`;
+   const cityState = req.body.cityState.split(','); 
+   const city = cityState[0];
+   const state = cityState[1];
+   console.log('city,state~~~~~~' ,city,state);
+   const URL = ` http://api.brewerydb.com/v2/locations?&locality=${city}&region=${state}&key=${API}`;
 
    request(URL, function(error, response, body) {
       if (!error && response.statusCode == 200) {
