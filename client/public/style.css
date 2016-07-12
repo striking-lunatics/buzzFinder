@@ -68,16 +68,22 @@ form {
     margin-right: 1em;
 }
 
-/***************/
-/***************/
-/* FORM */
-/***************/
-/***************/
-
 .breweryList {
     margin-left: 5px;
     margin-top: 20px;
 }
+
+/***************/
+/***************/
+/* Brewery Item Detail */
+/***************/
+/***************/
+
+.breweryDetail span{
+    display: inline-block;
+    padding-right: 10px;
+}
+
 
 /***************/
 /***************/
