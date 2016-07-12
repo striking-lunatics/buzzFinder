@@ -25,20 +25,19 @@ export default class BreweryList extends React.Component {
    }
 
    _fetchLocation() {
+      // get latitude and longitude using IP address
       const self = this;
       request('http://ip-api.com/json', function(error, response, body) {
          if (!error && response.statusCode == 200) {
             const IP = JSON.parse(body);
-
             console.log('BreweryList -> _fetchLocation', IP.lat, IP.lon);
-
             self._success(IP);
-
          }
       });
    }
 
    _success(IP) {
+     // send location to server
       const self = this;
       $.ajax({
          url: '/location',
@@ -51,6 +50,7 @@ export default class BreweryList extends React.Component {
    }
 
    _createBreweryComponents() {
+     //  map brewerys data -> create BreweryItem for each brewery
       if (this.state.brewerys) {
          return this.state.brewerys.filter((beer) => beer.streetAddress && beer.openToPublic == "Y" && beer.locationType != "office" && beer.brewery.images).map((beer, index) => {
             return <BreweryItem key={index} url={beer.brewery.website} name={beer.brewery.name} address={beer.streetAddress} zipcode={beer.postalCode} distance={beer.distance} type={beer.locationType} icon={beer.brewery.images.icon}/>
