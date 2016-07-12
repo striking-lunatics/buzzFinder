@@ -5,12 +5,16 @@ import $ from 'jquery';
 const request = require('request');
 
 export default class BreweryList extends React.Component {
-  //  constructor(props) {
-  //     super(props);
-  //     this.state = {
-  //        brewerys: null
-  //     }
-  //  }
+   constructor(props) {
+      super(props);
+      this.state = {
+         brewerys: null
+      }
+   }
+
+   componentDidMount() {
+      this._fetchLocation();
+   }
 
    render() {
       return (
@@ -20,6 +24,30 @@ export default class BreweryList extends React.Component {
       )
    }
 
+   _fetchLocation() {
+      // get latitude and longitude using IP address
+      const self = this;
+      request('http://ip-api.com/json', function(error, response, body) {
+         if (!error && response.statusCode == 200) {
+            const IP = JSON.parse(body);
+            console.log('BreweryList -> _fetchLocation', IP.lat, IP.lon);
+            self._success(IP);
+         }
+      });
+   }
+
+   _success(IP) {
+     // send location to server
+      const self = this;
+      $.ajax({
+         url: '/location',
+         type: 'POST',
+         contentType: 'application/json',
+         data: JSON.stringify({latitude: IP.lat, longitude: IP.lon}),
+         dataType: 'json',
+         success: (brewerys) => self.setState({brewerys: brewerys.data})
+      });
+   }
 
    _createBreweryComponents() {
      //  map brewerys data -> create BreweryItem for each brewery

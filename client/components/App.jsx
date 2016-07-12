@@ -10,9 +10,10 @@ export default class App extends React.Component {
       super(props);
       this.state = {
          term: '',
-         brewerys: [],
+         brewerys: null,
          latitude: 0,
-         longitude: 0
+         longitude: 0,
+         city: null
       }
 
    }
@@ -86,7 +87,8 @@ export default class App extends React.Component {
                         <button type='button' className='btn btn-primary' onClick={() => this._getLocation()}>Use current location</button>
                      </div>
                   </form>
-                  <BreweryList/>
+                  {/*pass App state to BreweryList*/}
+                  <BreweryList brewerys={this.state.brewerys}/>
                </div>
             </div>
          </div>

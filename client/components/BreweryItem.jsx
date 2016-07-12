@@ -2,6 +2,7 @@ import React from 'react';
 
 export default class BreweryItem extends React.Component {
    render() {
+     if(click) {}
       return (
         <div className="list-group breweryList">
            <a className="list-group-item" href={this.props.url || '#'} target='_blank'>
