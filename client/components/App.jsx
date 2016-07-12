@@ -27,7 +27,6 @@ export default class App extends React.Component {
    }
 
    _searchByCity() {
-      console.log('this.state.city~~~~~~',this.state.cityState);
       $.ajax({
          url: '/city',
          type: 'POST',
@@ -78,10 +77,10 @@ export default class App extends React.Component {
          <div className="container App">
             <div className="row">
                <div className='col-sm-7 col-sm-offset-5 heading'>
-               <div className='col-sm-8'>
-               <h1>Local Craft Brews</h1>
-               <h4>The Only Source for Craft Beer</h4>
-               </div>
+                  <div className='col-sm-8'>
+                     <h1>Local Craft Brews</h1>
+                     <h4>The Only Source for Craft Beer</h4>
+                  </div>
                   <AuthButton/>
                </div>
             </div>
@@ -89,13 +88,12 @@ export default class App extends React.Component {
                <div className='col-sm-7 col-sm-offset-5'>
                   {/*{ Create search box and add two-way bindings }*/}
                   <form>
-                     <input className='input-large form-control' value={this.state.city} onKeyPress={(e) => this.test(e)} onChange={(e) => this.setState({cityState: e.target.value})} type='text' placeholder='Search by city.....'/>
+                     <input className='input-large form-control' value={this.state.city} onKeyPress={(e) => this.test(e)} onChange={(e) => this.setState({cityState: e.target.value})} type='text' placeholder='Search by city, state.....'/>
                      <div className='btn-group' role='group'>
-                        <button type='button' className='btn btn-primary' 
-                           onClick={(e) => {
-                              e.preventDefault();
-                              this._searchByCity();
-                           }}>
+                        <button type='button' className='btn btn-primary' onClick={(e) => {
+                           e.preventDefault();
+                           this._searchByCity();
+                        }}>
 
                            Search
                         </button>
