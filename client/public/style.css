@@ -1,15 +1,7 @@
 /***************/
-
-
 /***************/
-
-
 /* GENERAL */
-
-
 /***************/
-
-
 /***************/
 
 body {
@@ -21,18 +13,10 @@ body {
     font-family: 'Oswald', sans-serif;
 }
 
+/***************
 /***************/
-
-
-/***************/
-
-
 /* HEADER */
-
-
 /***************/
-
-
 /***************/
 
 .heading {
@@ -54,17 +38,9 @@ body {
 }
 
 /***************/
-
-
 /***************/
-
-
 /* FORM */
-
-
 /***************/
-
-
 /***************/
 
 form {
@@ -93,23 +69,26 @@ form {
 }
 
 /***************/
-
-
+/***************/
+/* FORM */
+/***************/
 /***************/
 
+.breweryList {
+    margin-left: 5px;
+    margin-top: 20px;
+}
 
+/***************/
+/***************/
 /* MEDIA QUERY: Small Devices, Tablets */
-
-
 /***************/
-
-
 /***************/
 
 @media only screen and (max-width: 768px) {
     body {
         background: url('beerbg-sm.jpg') no-repeat center bottom fixed;
-        background-color: black;
+        background-color: black !important;
     }
     .heading h1 {
         margin-top: 0;
