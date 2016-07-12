@@ -9,11 +9,10 @@ export default class App extends React.Component {
    constructor(props) {
       super(props);
       this.state = {
-         term: '',
+         cityState: '',
          brewerys: null,
          latitude: 0,
-         longitude: 0,
-         city: null
+         longitude: 0
       }
 
    }
@@ -25,6 +24,18 @@ export default class App extends React.Component {
       } else {
          console.log("Browser doesn't support geolocation");
       }
+   }
+
+   _searchByCity() {
+      console.log('this.state.city~~~~~~',this.state.cityState);
+      $.ajax({
+         url: '/city',
+         type: 'POST',
+         contentType: 'application/json',
+         data: JSON.stringify({cityState: this.state.cityState}),
+         dataType: 'json',
+         success: this._fetchBrewerysByLocation.bind(this)
+      });
    }
 
    _requestLocation() {
@@ -78,12 +89,17 @@ export default class App extends React.Component {
                <div className='col-sm-7 col-sm-offset-5'>
                   {/*{ Create search box and add two-way bindings }*/}
                   <form>
-                     <input className='input-large form-control' value={this.state.term} onKeyPress={(e) => this.test(e)} onChange={(e) => this.setState({term: e.target.value})} type='text' placeholder='Search by city.....'/>
+                     <input className='input-large form-control' value={this.state.city} onKeyPress={(e) => this.test(e)} onChange={(e) => this.setState({cityState: e.target.value})} type='text' placeholder='Search by city.....'/>
                      <div className='btn-group' role='group'>
-                        <button type='button' className='btn btn-primary' onClick={(e) => e.preventDefault()}>
+                        <button type='button' className='btn btn-primary' 
+                           onClick={(e) => {
+                              e.preventDefault();
+                              this._searchByCity();
+                           }}>
+
                            Search
                         </button>
-                        {/*here is our state (test): {this.state.term}*/}
+                        {/*here is our state (test): {this.state.city}*/}
                         <button type='button' className='btn btn-primary' onClick={() => this._getLocation()}>Use current location</button>
                      </div>
                   </form>
