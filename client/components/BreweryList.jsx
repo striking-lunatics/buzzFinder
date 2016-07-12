@@ -18,7 +18,7 @@ export default class BreweryList extends React.Component {
 
    render() {
       return (
-         <div>
+         <div className='breweryList'>
             {this._createBreweryComponents()}
          </div>
       )
