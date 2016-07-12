@@ -52,6 +52,48 @@ app.post('/location', function(req, res) {
    })
 });
 
+app.post('/brewery/beer', function (req, res) {
+
+   const breweryID = req.body.breweryId
+
+   console.log("1: ", breweryID)
+
+   const URL = `http://api.brewerydb.com/v2/brewery/${breweryID}/beers?key=${API}`;
+
+   request(URL, function(error, response, body) {
+      console.log("2: ", body)
+      if (!error && response.statusCode == 200) {
+      
+
+         console.log('Server: Sending Data')
+         res.send(JSON.parse(body));
+      } else {
+         console.log("error: ", error)
+      }
+   })
+});
+
+app.post('/beer/brewery', function (req, res) {
+
+   const beerID = req.body.beerId
+
+   console.log("1: ", beerID)
+
+   const URL = `http://api.brewerydb.com/v2/beer/${beerID}/breweries?key=${API}`;
+
+   request(URL, function(error, response, body) {
+      console.log("2: ", body)
+      if (!error && response.statusCode == 200) {
+      
+
+         console.log('Server: Sending Data')
+         res.send(JSON.parse(body));
+      } else {
+         console.log("error: ", error)
+      }
+   })
+});
+
 var port = process.env.PORT || 1337;
 app.listen(port);
 console.log("Listening on localhost:" + port);
