@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const browserify = require('browserify-middleware');
+var db  = require('./db');
 const app = express();
 const bodyParser = require('body-parser');
 const request = require('request');
