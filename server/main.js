@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const browserify = require('browserify-middleware');
-var db  = require('./db');
+var db = require('./db');
 const app = express();
 const bodyParser = require('body-parser');
 const request = require('request');
@@ -37,15 +37,13 @@ app.use(function(req, res, next) {
 
 app.post('/location', function(req, res) {
 
-   console.log("runnnning")
-      //console.log("data:", req.body)
    console.log(req.body.latitude, req.body.longitude)
 
    const URL = `http://api.brewerydb.com/v2/search/geo/point?radius=100&lat=${req.body.latitude}&lng=${req.body.longitude}&key=${API}`;
 
    request(URL, function(error, response, body) {
       if (!error && response.statusCode == 200) {
-         console.log('Server: Sending Data')
+         console.log('/location: Sending Data')
          res.send(JSON.parse(body));
       } else {
          console.log("error: ", error)
@@ -53,7 +51,7 @@ app.post('/location', function(req, res) {
    })
 });
 
-app.post('/brewery/beer', function (req, res) {
+app.post('/brewery/beer', function(req, res) {
 
    const breweryID = req.body.breweryId
 
@@ -64,9 +62,8 @@ app.post('/brewery/beer', function (req, res) {
    request(URL, function(error, response, body) {
       console.log("2: ", body)
       if (!error && response.statusCode == 200) {
-      
 
-         console.log('Server: Sending Data')
+         console.log('/brewery/beer: Sending Data')
          res.send(JSON.parse(body));
       } else {
          console.log("error: ", error)
@@ -74,7 +71,7 @@ app.post('/brewery/beer', function (req, res) {
    })
 });
 
-app.post('/beer/brewery', function (req, res) {
+app.post('/beer/brewery', function(req, res) {
 
    const beerID = req.body.beerId
 
@@ -85,9 +82,24 @@ app.post('/beer/brewery', function (req, res) {
    request(URL, function(error, response, body) {
       console.log("2: ", body)
       if (!error && response.statusCode == 200) {
-      
 
-         console.log('Server: Sending Data')
+         console.log('/beer/brewery: Sending Data')
+         res.send(JSON.parse(body));
+      } else {
+         console.log("error: ", error)
+      }
+   })
+});
+
+// find brewerys based on city, state
+app.post('/city', function(req, res) {
+
+   const URL = `http://api.brewerydb.com/v2/beer/${beerID}/breweries?key=${API}`;
+
+   request(URL, function(error, response, body) {
+      if (!error && response.statusCode == 200) {
+
+         console.log('/city: Sending Data')
          res.send(JSON.parse(body));
       } else {
          console.log("error: ", error)
