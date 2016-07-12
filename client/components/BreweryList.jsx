@@ -10,8 +10,8 @@ export default class BreweryList extends React.Component {
       this.state = {
          brewerys: null
       }
-
    }
+
    componentDidMount() {
       this._fetchLocation();
    }
@@ -25,7 +25,7 @@ export default class BreweryList extends React.Component {
    }
 
    _fetchLocation() {
-     const self = this;
+      const self = this;
       request('http://ip-api.com/json', function(error, response, body) {
          if (!error && response.statusCode == 200) {
             const IP = JSON.parse(body);
@@ -35,21 +35,19 @@ export default class BreweryList extends React.Component {
             self._success(IP);
 
          }
-      })
+      });
    }
 
-
-
    _success(IP) {
-     const THIS = this;
-     $.ajax({
-        url: '/location',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({latitude: IP.lat, longitude: IP.lon}),
-        dataType: 'json',
-        success: (brewerys) => THIS.setState({brewerys: brewerys.data})
-     });
+      const self = this;
+      $.ajax({
+         url: '/location',
+         type: 'POST',
+         contentType: 'application/json',
+         data: JSON.stringify({latitude: IP.lat, longitude: IP.lon}),
+         dataType: 'json',
+         success: (brewerys) => self.setState({brewerys: brewerys.data})
+      });
    }
 
    _createBreweryComponents() {

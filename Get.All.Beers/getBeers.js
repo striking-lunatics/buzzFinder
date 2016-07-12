@@ -1,5 +1,19 @@
 const request = require('request');
 const API = 'da506aecce47e548b1877f8c6f9be793';
+const fs = require('fs');
+const BEER_DATA = [];
+var numBrewerys = null;
+var count = 0;
+
+function writeToFile() {
+   fs.writeFile("beers.json", JSON.stringify(BEER_DATA), function(err) {
+      if (err) {
+         console.log(err);
+      }
+      console.log("Get All-beerData saved!");
+   });
+}
+
 fetchLocation()
 
 function fetchLocation() {
@@ -18,6 +32,7 @@ function fetchBrwerysLocation(lat, long) {
       if (!error && response.statusCode == 200) {
          const brewerys = JSON.parse(body).data;
          const brewerysIDs = brewerys.map(brewery => brewery.id);
+         numBrewerys = brewerysIDs.length;
          brewerysIDs.forEach(id => fetchBeers(id));
       }
    })
@@ -28,7 +43,14 @@ function fetchBeers(id) {
    request(URL, function(error, response, body) {
       if (!error && response.statusCode == 200) {
          const beers = JSON.parse(body).data;
+         BEER_DATA.push(beers);
 
+         count++;
+         if (count === numBrewerys) {
+            // inc count when more data is pushed to array
+            // when count === numBrewerys call the fs write funciton
+            writeToFile()
+         }
       }
    })
 }
