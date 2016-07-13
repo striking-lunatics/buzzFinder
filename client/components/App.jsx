@@ -88,7 +88,7 @@ export default class App extends React.Component {
                <div className='col-sm-7 col-sm-offset-5'>
                   {/*{ Create search box and add two-way bindings }*/}
                   <form>
-                     <input className='input-large form-control' value={this.state.city} onKeyPress={(e) => this.test(e)} onChange={(e) => this.setState({cityState: e.target.value})} type='text' placeholder='Search by city, state.....'/>
+                     <input className='input-large form-control' value={this.state.city} onKeyPress={(e) => this._test(e)} onChange={(e) => this.setState({cityState: e.target.value})} type='text' placeholder='Search by city, state.....'/>
                      <div className='btn-group' role='group'>
                         <button type='button' className='btn btn-primary' onClick={(e) => {
                            e.preventDefault();
@@ -108,8 +108,10 @@ export default class App extends React.Component {
          </div>
       );
    }
-   test(e) {
+   _test(e) {
+     // DOESNT WORK 
+     console.log(e.key)
       if (e.key === 'Enter')
-         alert('they pressed enter we will search by provided city');
+        this._searchByCity();
       }
    }

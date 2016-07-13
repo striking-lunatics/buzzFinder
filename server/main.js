@@ -163,7 +163,7 @@ app.post('/city', function(req, res) {
          // add distance data to all brewerys
          var body = JSON.parse(body);
          if (body.data) {
-            console.log(body.data)
+            //console.log(body.data)
             console.log('distance Miles: ', distanceMiles);
             body.data.forEach(brewery => brewery.distance = Math.round(distanceMiles));
             res.send(body);

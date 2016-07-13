@@ -12,7 +12,7 @@
 //    	console.log(this.props.brewerys)
 //       return (
 //          <div className="modal-container col-sm-6">
-                    
+
 //                      <Modal show={this.state.show} onHide={close} container={this} aria-labelledby="contained-modal-title">
 //                         {/* Detail panel */}
 //                         <Modal.Header closeButton>
