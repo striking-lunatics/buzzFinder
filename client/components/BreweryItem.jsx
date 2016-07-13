@@ -1,6 +1,7 @@
 import React from 'react';
 import BreweryDetail from './BreweryDetail.jsx';
 import {Button, Modal} from 'react-bootstrap';
+import $ from 'jquery';
 
 export default class BreweryItem extends React.Component {
 
@@ -10,6 +11,18 @@ export default class BreweryItem extends React.Component {
          show: false
       }
    }
+   _getBeers() {
+     console.log('Get Beers')
+      $.ajax({
+         url: '/brewery/beer',
+         type: 'POST',
+         contentType: 'application/json',
+         data: JSON.stringify({breweryId: this.props.id}),
+         dataType: 'json',
+         success: beers => console.log(beers)
+      });
+   }
+
    render() {
 
       let close = () => this.setState({show: false});
@@ -36,7 +49,7 @@ export default class BreweryItem extends React.Component {
                   <a href={this.props.url} target='_blank'>
                      <img className='center-block img-circle' src={this.props.image || 'http://www.frenchtoastsunday.com/wp-content/uploads/2015/02/beer-icon.png'} alt={this.props.name}/>
                   </a>
-                  <br/> {this.props.description || 'No description'}
+                  <br/> {this.props.description || 'No description'}{this._getBeers()}
                </Modal.Body>
                <Modal.Footer>
                   <div className='btn-group' role='group'>
