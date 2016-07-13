@@ -16,7 +16,10 @@ body {
 button, .btn:focus, .btn-primary:focus, .btn-primary .focus{
   outline: none;
 }
-
+body.modal-open {
+    overflow:hidden;
+    position: fixed;
+}
 /***************
 /***************/
 /* HEADER */
@@ -82,6 +85,12 @@ form {
 /***************/
 /***************/
 
+
+.breweryDetail .modal-body {
+    overflow-y: scroll;
+    height:450px;
+}
+
 .breweryDetail .title, .breweryDetail h4 {
      font-family: 'Oswald', sans-serif;
      font-weight: bold;
@@ -116,7 +125,7 @@ form {
 
 @media only screen and (max-width: 768px) {
     body {
-        /*background: url('beerbg-sm.jpg') no-repeat center bottom fixed;*/
+        background: url('beerbg-sm.jpg') no-repeat center bottom fixed;
         background-color: black !important;
     }
     .heading h1 {
