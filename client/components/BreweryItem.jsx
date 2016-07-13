@@ -19,7 +19,11 @@ export default class BreweryItem extends React.Component {
          contentType: 'application/json',
          data: JSON.stringify({breweryId: this.props.id}),
          dataType: 'json',
-         success: beers => console.log(beers)
+         success: beers => {
+           if(beers.data) {
+             console.log('Beer List',this.props.id, beers.data);
+           }
+         }
       });
    }
 
