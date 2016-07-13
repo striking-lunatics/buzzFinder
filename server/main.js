@@ -116,19 +116,22 @@ app.post('/beer/brewery', function(req, res) {
    })
 });
 
+// get location on run
+fetchLocation();
 function fetchLocation() {
    // fetchLocation
    request('http://ip-api.com/json', function(error, response, body) {
       if (!error && response.statusCode == 200) {
          const IP = JSON.parse(body);
          LOCATION.lat = IP.lat;
-         LOCATION.long = IP.long;
+         LOCATION.long = IP.lon;
       }
    })
 }
 
 // find brewerys based on city, state
 app.post('/city', function(req, res) {
+  console.log(LOCATION.lat,LOCATION.long)
 
    var cityState = req.body.cityState.split(',');
    var city = cityState[0];
@@ -159,13 +162,13 @@ app.post('/city', function(req, res) {
          // this api call does not return distance
          // use helper function to calc and insert into object then send to client
          var distanceKm = getDistanceFromLatLonInKm(LOCATION.lat, LOCATION.long, lat, long);
-         var distanceMiles = 0.62137 * distanceKm;
+         var distanceMiles = Math.round(0.62137 * distanceKm);
          // add distance data to all brewerys
          var body = JSON.parse(body);
          if (body.data) {
             //console.log(body.data)
             console.log('distance Miles: ', distanceMiles);
-            body.data.forEach(brewery => brewery.distance = Math.round(distanceMiles));
+            body.data.forEach(brewery => brewery.distance = distanceMiles);
             res.send(body);
          } else {
             console.log('/city: Error');
