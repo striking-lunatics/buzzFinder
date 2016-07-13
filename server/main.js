@@ -156,8 +156,8 @@ app.post('/city', function(req, res) {
 
          // this api call does not return distance
          // use helper function to calc and insert into object then send to client
-         let distanceKm = getDistanceFromLatLonInKm(LOCATION.lat, LOCATION.long, lat, long);
-         let distanceMiles = 0.62137 * distanceKm;
+         var distanceKm = getDistanceFromLatLonInKm(LOCATION.lat, LOCATION.long, lat, long);
+         var distanceMiles = 0.62137 * distanceKm;
          // add distance data to all brewerys
          var body = JSON.parse(body);
          console.log('distance Miles: ', distanceMiles);

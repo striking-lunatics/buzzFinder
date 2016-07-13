@@ -84,6 +84,25 @@ form {
     padding-right: 10px;
 }
 
+.breweryDetail .title{
+    font-weight: bold;
+}
+
+.breweryDetail .address{
+    /*float: right;
+    padding-right: 15px;*/
+    /*margin-top: 3px;*/
+    font-size: 0.7em;
+    color: #a3a3a3;
+}
+
+.breweryDetail .modal-footer{
+    text-align: center;
+}
+
+.heart {
+    color: firebrick;
+}
 
 /***************/
 /***************/

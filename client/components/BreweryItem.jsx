@@ -23,22 +23,33 @@ export default class BreweryItem extends React.Component {
             <Modal className='breweryDetail' show={this.state.show} onHide={close} container={this} aria-labelledby="contained-modal-title">
                {/* Detail panel */}
                <Modal.Header closeButton>
-                  <Modal.Title id="contained-modal-title">{this.props.name}
+                  <Modal.Title id="contained-modal-title"> <span className='title'> {this.props.name} </span>
+                    <span className='address'>{!(this.props.address)? null: this.props.address}</span>
                   </Modal.Title>
                </Modal.Header>
                <Modal.Body>
-                  <a href={this.props.url}>
+                  <a href={this.props.url} target='_blank'>
                      <img className='center-block img-circle' src={this.props.image || 'http://www.frenchtoastsunday.com/wp-content/uploads/2015/02/beer-icon.png'} alt={this.props.name}/>
                   </a>
                   <br/>
-                  <span>Address:
-                  </span>
-                  {this.props.address || 'No address available'}
-                  <br/> {this.props.description || 'No description'}
-
+                  {this.props.description || 'No description'}
                </Modal.Body>
                <Modal.Footer>
-                  <button type='button' className='btn btn-primary' onClick={close}>Close</button>
+                  <div className='btn-group' role='group'>
+                     <button type='button' className='btn btn-primary' onClick={(e) => {
+                        e.preventDefault()}}>
+                        &larr; Prev
+                     </button>
+                     <button type='button' className='btn btn-primary heart' onClick={(e) => {
+                        e.preventDefault()}}>
+                        &hearts;
+                     </button>
+                     {/*here is our state (test): {this.state.city}*/}
+                     <button type='button' className='btn btn-primary' onClick={(e) => {
+                        e.preventDefault()}}>
+                        Next &rarr;
+                     </button>
+                  </div>
                </Modal.Footer>
             </Modal>
          </div>
