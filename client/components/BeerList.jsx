@@ -9,7 +9,7 @@ export default class BeerList extends React.Component {
 
 
    _createBeerComponents() {
-     console.log("_createBeerComponents", this.props.beers)
+     //console.log("_createBeerComponents", this.props.beers)
       if (this.props.beers) {
          return this.props.beers.map((beer, index) => {
             return <BeerItem
