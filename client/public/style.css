@@ -1,7 +1,15 @@
 /***************/
+
+
 /***************/
+
+
 /* GENERAL */
+
+
 /***************/
+
+
 /***************/
 
 body {
@@ -15,8 +23,14 @@ body {
 
 /***************
 /***************/
+
+
 /* HEADER */
+
+
 /***************/
+
+
 /***************/
 
 .heading {
@@ -38,9 +52,17 @@ body {
 }
 
 /***************/
+
+
 /***************/
+
+
 /* FORM */
+
+
 /***************/
+
+
 /***************/
 
 form {
@@ -67,47 +89,58 @@ form {
     display: inline-block;
     margin-right: 1em;
 }
-
 .breweryList {
     margin-left: 5px;
     margin-top: 20px;
 }
 
 /***************/
-/***************/
-/* Brewery Item Detail */
-/***************/
+
+
 /***************/
 
-.breweryDetail span{
+
+/* Brewery Item Detail */
+
+
+/***************/
+
+
+/***************/
+
+.breweryDetail span {
     display: inline-block;
     padding-right: 10px;
 }
-
-.breweryDetail .title{
+.breweryDetail .title {
     font-weight: bold;
 }
-
-.breweryDetail .address{
+.breweryDetail .address {
     /*float: right;
     padding-right: 15px;*/
     /*margin-top: 3px;*/
     font-size: 0.7em;
     color: #a3a3a3;
 }
-
-.breweryDetail .modal-footer{
+.breweryDetail .modal-footer {
     text-align: center;
 }
-
 .heart {
     color: firebrick;
 }
 
 /***************/
+
+
 /***************/
+
+
 /* MEDIA QUERY: Small Devices, Tablets */
+
+
 /***************/
+
+
 /***************/
 
 @media only screen and (max-width: 768px) {

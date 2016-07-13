@@ -118,6 +118,7 @@ app.post('/beer/brewery', function(req, res) {
 
 // get location on run
 fetchLocation();
+
 function fetchLocation() {
    // fetchLocation
    request('http://ip-api.com/json', function(error, response, body) {
@@ -131,8 +132,6 @@ function fetchLocation() {
 
 // find brewerys based on city, state
 app.post('/city', function(req, res) {
-  console.log(LOCATION.lat,LOCATION.long)
-
    var cityState = req.body.cityState.split(',');
    var city = cityState[0];
    var state = cityState[1];

@@ -71,6 +71,13 @@ export default class App extends React.Component {
       // we now can use this data in the child components
       // this.props.brewerys
    }
+   
+   _test(e) {
+      // DOESNT WORK
+      console.log(e.key)
+      if (e.key === 'Enter')
+         this._searchByCity();
+      }
 
    render() {
       return (
@@ -108,10 +115,4 @@ export default class App extends React.Component {
          </div>
       );
    }
-   _test(e) {
-     // DOESNT WORK 
-     console.log(e.key)
-      if (e.key === 'Enter')
-        this._searchByCity();
-      }
-   }
+}
