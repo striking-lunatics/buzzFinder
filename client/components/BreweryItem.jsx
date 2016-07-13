@@ -27,6 +27,10 @@ export default class BreweryItem extends React.Component {
          data: JSON.stringify({breweryId: this.props.breweryID}),
          dataType: 'json',
          success: beers => {
+            if(beers.data) {
+             console.log('Beer List',this.props.id, beers.data);
+            }
+
             if (beers.data) {
                self.setState({beers: beers.data});
               // console.log('Beer List', this.props.breweryID, beers.data);
@@ -71,16 +75,15 @@ export default class BreweryItem extends React.Component {
                   <a href={this.props.url} target='_blank'>
                      <img className='center-block img-circle' src={this.props.image || 'http://www.frenchtoastsunday.com/wp-content/uploads/2015/02/beer-icon.png'} alt={this.props.name}/>
                   </a>
-                  <br/> {this.props.description || 'No description'}
+                  <h4>Description</h4>
+                  <div className='description'>
+                   {this.props.description || 'No description'}{this._getBeers()}
+                  </div>
 
                     {/* <BeerList breweryID={this.props.id}/> */}
                     { self.state.beers ? console.log(`rendering ${self.state.beers.length} beers`) : console.log()}
                     <BeerList beers={self.state.beers}/>
-
                </Modal.Body>
-
-
-
                <Modal.Footer>
                   <div className='btn-group' role='group'>
                      <button type='button' className='btn btn-primary' onClick={(e) => {
