@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const browserify = require('browserify-middleware');
 const db = require('./db');
+const Brewery = require('./models/brewery.js');
 const app = express();
 const bodyParser = require('body-parser');
 const request = require('request');
@@ -175,8 +176,46 @@ app.post('/city', function(req, res) {
          console.log("error: ", error)
       }
    })
-});
+}); 
+
+//add like to database brewery table and user table
+app.post('/brewery/like', function(req, res) {
+
+
+  Brewery.findById(req.body.breweryId)
+    .then(function(breweryData) {
+
+      if(breweryData.length === 0) {
+
+        Brewery.create(req.body.breweryId, req.body.userId)
+        .then(function(data) { 
+
+          res.send(201, data[0]); 
+        })
+      }
+
+      else {
+        Brewery.incrementLikes(req.body.breweryId, req.body.userId)
+          .then(function(data) { 
+            if(!data[0]) {
+              res.send(400, "error: user has already liked this brewery!")
+            }
+            res.send(201, data[0]);
+          })
+      }
+    }) 
+})
 
 var port = process.env.PORT || 1337;
 app.listen(port);
 console.log("Listening on localhost:" + port);
+
+
+
+
+
+
+
+
+
+
