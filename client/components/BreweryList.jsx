@@ -32,7 +32,7 @@ export default class BreweryList extends React.Component {
               socialAccounts={beer.brewery.socialAccounts}/>
          });
       } else {
-         return <h2>Loading Beers...</h2>
+         return <h2>Loading brewerys...</h2>
       }
    }
 }

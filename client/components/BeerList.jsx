@@ -3,7 +3,13 @@ import BeerItem from './BreweryItem.jsx';
 
 export default class BeerList extends React.Component {
 
+  componentWillReceiveProps() {
+
+  }
+
+
    _createBeerComponents() {
+     console.log("_createBeerComponents", this.props.beers)
       if (this.props.beers) {
          return this.props.beers.map((beer, index) => {
             return <BeerItem
@@ -12,8 +18,7 @@ export default class BeerList extends React.Component {
               id={beer.id}
               description={beer.description}
               abv={beer.abv}
-              ibu={beer.ibu}
-              style={beer.style.category.name}/>
+              ibu={beer.ibu}/>
          });
       }  else {
          return <h2>Loading...</h2>

@@ -13,8 +13,13 @@ export default class BreweryItem extends React.Component {
          beers: null
       }
    }
+   componentDidMount() {
+     // call on load
+     this._getBeers();
+   }
 
    _getBeers() {
+     const self = this;
       $.ajax({
          url: '/brewery/beer',
          type: 'POST',
@@ -23,8 +28,8 @@ export default class BreweryItem extends React.Component {
          dataType: 'json',
          success: beers => {
             if (beers.data) {
-               this.setState({beers: beers.data});
-               console.log('Beer List', this.props.breweryID, beers.data);
+               self.setState({beers: beers.data});
+              // console.log('Beer List', this.props.breweryID, beers.data);
             }
          }
       });
@@ -34,6 +39,7 @@ export default class BreweryItem extends React.Component {
 
       let close = () => this.setState({show: false});
       var self = this;
+      //console.log("this.state.beers", this.state.beers)
       return (
 
          <div className="list-group breweryList">
@@ -68,8 +74,9 @@ export default class BreweryItem extends React.Component {
                   <br/> {this.props.description || 'No description'}
 
                     {/* <BeerList breweryID={this.props.id}/> */}
-                    {this._getBeers()}
-                    <BeerList beers={self.props.beers}/>
+                    { self.state.beers ? console.log(`rendering ${self.state.beers.length} beers`) : console.log()}
+                    <BeerList beers={self.state.beers}/>
+
                </Modal.Body>
 
 
