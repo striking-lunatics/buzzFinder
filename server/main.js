@@ -80,13 +80,13 @@ app.post('/brewery/beer', function(req, res) {
 
    const breweryID = req.body.breweryId
 
-   console.log("breweryID", breweryID)
+   //console.log("breweryID", breweryID)
 
    const URL = `http://api.brewerydb.com/v2/brewery/${breweryID}/beers?key=${API}`;
 
    request(URL, function(error, response, body) {
       if (!error && response.statusCode == 200) {
-         console.log(JSON.parse(body))
+         //console.log(JSON.parse(body))
          console.log('/brewery/beer: Sending Data')
          res.send(JSON.parse(body));
       } else {
