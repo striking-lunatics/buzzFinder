@@ -1,6 +1,7 @@
 import React from 'react';
 import BreweryItem from './BreweryItem.jsx';
 import $ from 'jquery';
+import Loader from './loadingComponent.jsx';
 //import App from './App.jsx';
 const request = require('request');
 
@@ -56,7 +57,7 @@ export default class BreweryList extends React.Component {
             return <BreweryItem key={index} url={beer.brewery.website} name={beer.brewery.name} address={beer.streetAddress} zipcode={beer.postalCode} distance={beer.distance} type={beer.locationType} icon={beer.brewery.images.icon}/>
          });
       } else {
-         return <h2>Loading...</h2>
+         return <Loader />
       }
 
    }

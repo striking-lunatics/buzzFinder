@@ -1,6 +1,7 @@
 import React from 'react';
 import BreweryItem from './BreweryItem.jsx';
 import $ from 'jquery';
+import Loader from './loadingComponent.jsx';
 const request = require('request');
 
 export default class BreweryList extends React.Component {
@@ -32,7 +33,7 @@ export default class BreweryList extends React.Component {
               socialAccounts={beer.brewery.socialAccounts}/>
          });
       } else {
-         return <h2>Loading brewerys...</h2>
+         return <Loader />
       }
    }
 }
