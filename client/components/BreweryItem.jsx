@@ -53,7 +53,10 @@ export default class BreweryItem extends React.Component {
                   <a href={this.props.url} target='_blank'>
                      <img className='center-block img-circle' src={this.props.image || 'http://www.frenchtoastsunday.com/wp-content/uploads/2015/02/beer-icon.png'} alt={this.props.name}/>
                   </a>
-                  <br/> {this.props.description || 'No description'}{this._getBeers()}
+                  <h4>Description</h4>
+                  <div className='description'>
+                   {this.props.description || 'No description'}{this._getBeers()}
+                  </div>
                </Modal.Body>
                <Modal.Footer>
                   <div className='btn-group' role='group'>
