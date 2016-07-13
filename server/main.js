@@ -140,8 +140,10 @@ app.post('/city', function(req, res) {
    request(geoURL, function(error, response, body) {
       if (!error && response.statusCode == 200) {
          var data = JSON.parse(body);
-         lat = data.results[0].geometry.location.lat;
-         long = data.results[0].geometry.location.lng;
+         if (data.results[0]) {
+            lat = data.results[0].geometry.location.lat;
+            long = data.results[0].geometry.location.lng;
+         }
       } else {
          console.log("error: ", error)
       }
@@ -160,10 +162,14 @@ app.post('/city', function(req, res) {
          var distanceMiles = 0.62137 * distanceKm;
          // add distance data to all brewerys
          var body = JSON.parse(body);
-         console.log('distance Miles: ', distanceMiles);
-         body.data.forEach(brewery => brewery.distance = Math.round(distanceMiles));
-         res.send(body);
-
+         if (body.data) {
+            console.log(body.data)
+            console.log('distance Miles: ', distanceMiles);
+            body.data.forEach(brewery => brewery.distance = Math.round(distanceMiles));
+            res.send(body);
+         } else {
+            console.log('/city: Error');
+         }
       } else {
          console.log("error: ", error)
       }
