@@ -28,7 +28,7 @@ export default class BreweryItem extends React.Component {
          dataType: 'json',
          success: beers => {
             if(beers.data) {
-             console.log('Beer List',this.props.id, beers.data);
+             console.log('Beer List', beers.data);
             }
 
             if (beers.data) {
