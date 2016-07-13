@@ -19,9 +19,9 @@ export default class BreweryList extends React.Component {
          return this.props.brewerys.filter((beer) => beer.streetAddress && beer.openToPublic == "Y" && beer.locationType != "office" && beer.brewery.images).map((beer, index) => {
             return <BreweryItem
               key={index}
-              id={beer.id}
+              breweryID={beer.id}
               url={beer.brewery.website}
-              name={beer.brewery.name} 
+              name={beer.brewery.name}
               description={beer.brewery.description}
               address={beer.streetAddress}
               zipcode={beer.postalCode}
@@ -32,7 +32,7 @@ export default class BreweryList extends React.Component {
               socialAccounts={beer.brewery.socialAccounts}/>
          });
       } else {
-         return <h2>Loading...</h2>
+         return <h2>Loading brewerys...</h2>
       }
    }
 }
