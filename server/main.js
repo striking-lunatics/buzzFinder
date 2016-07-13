@@ -71,7 +71,7 @@ app.post('/location', function(req, res) {
          console.log('/location: Sending Data')
          res.send(JSON.parse(body));
       } else {
-         console.log("error: ", error)
+         console.log("/location error: ", error)
       }
    })
 });
@@ -90,7 +90,7 @@ app.post('/brewery/beer', function(req, res) {
          console.log('/brewery/beer: Sending Data')
          res.send(JSON.parse(body));
       } else {
-         console.log("error: ", error)
+         console.log("/brewery/beer error: ", error)
       }
    })
 });
@@ -110,7 +110,7 @@ app.post('/beer/brewery', function(req, res) {
          console.log('/beer/brewery: Sending Data')
          res.send(JSON.parse(body));
       } else {
-         console.log("error: ", error)
+         console.log("/beer/brewery error: ", error)
       }
    })
 });
@@ -146,7 +146,7 @@ app.post('/city', function(req, res) {
             long = data.results[0].geometry.location.lng;
          }
       } else {
-         console.log("error: ", error)
+         console.log("/city error: ", error)
       }
    })
 
@@ -172,7 +172,7 @@ app.post('/city', function(req, res) {
             console.log('/city: Error');
          }
       } else {
-         console.log("error: ", error)
+         console.log("/city error: ", error)
       }
    })
 });
