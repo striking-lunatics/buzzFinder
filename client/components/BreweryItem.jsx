@@ -16,7 +16,6 @@ export default class BreweryItem extends React.Component {
    handleOnClick(event) {
       event.preventDefault();
        $("body").addClass("modal-open");
-      console.log('handle on click');
       this.props.selectView(this.props.viewId);
       return false;
    }
@@ -44,7 +43,6 @@ export default class BreweryItem extends React.Component {
    }
 
    render() {
-      console.log('in breweryItem~~~~')
       // let close = () => {this.setState({show: false}); $("body").removeClass("modal-open")};
       // var self = this;
 

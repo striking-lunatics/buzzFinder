@@ -22,7 +22,8 @@ export default class BreweryList extends React.Component {
         company = undefined;
       } else {
         company = this.props.brewerys[activeId];
-        console.log('company is~~~~' , company)
+        console.log('this.props.brewerys~~', this.props.brewerys)
+        console.log('activeId is~~~~' , activeId)
       }
 
       let breweryView;
@@ -41,7 +42,6 @@ export default class BreweryList extends React.Component {
 
          <div className='breweryList'>
             {this._createBreweryComponents()}
-            {console.log(breweryView)}
             {breweryView}
          </div>
       )
@@ -75,7 +75,6 @@ export default class BreweryList extends React.Component {
 
    _createBreweryComponents() {
       //  map brewerys data -> create BreweryItem for each brewery
-      console.log('this.props.brewerys~~~~',this.props.brewerys)
       if (this.props.brewerys) {
          return this.props.brewerys.filter((beer) => beer.streetAddress && beer.openToPublic == "Y" && beer.locationType != "office" && beer.brewery.images && beer.brewery.images.squareMedium).map((beer, index) => {
             return <BreweryItem
