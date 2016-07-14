@@ -132,14 +132,20 @@ form {
 /***************/
 /***************/
 
+.loading {
+    margin-left: -100px;
+    position: relative;
+    margin-top: -150px;
+}
+
 .beer_text {
   font-family: 'futura';
   color: white;
-  letter-spacing: 20px;
+  letter-spacing: 10px;
   font-size: 30px;
   position: absolute;
-  top: 195px;
-  left: 370px; }
+  top: 315px;
+  left: 150px; }
 
 .dribbble {
   color: #EC4E8B; }
