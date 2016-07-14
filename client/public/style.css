@@ -20,6 +20,16 @@ body.modal-open {
     overflow:hidden;
     position: fixed;
 }
+
+.breweryList .list-group-item {
+    color: #d6760b; 
+    cursor: pointer;
+}
+
+.breweryList .list-group-item:hover {
+    color: #337ab7;
+}
+
 /***************
 /***************/
 /* HEADER */
@@ -86,7 +96,7 @@ form {
 /***************/
 
 
-.breweryDetail .modal-body, .modal-body {
+.breweryDetail .modal-body {
     overflow-y: scroll;
     height:450px;
 }
