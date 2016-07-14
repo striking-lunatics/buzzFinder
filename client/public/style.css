@@ -86,7 +86,7 @@ form {
 /***************/
 
 
-.breweryDetail .modal-body {
+.breweryDetail .modal-body, .modal-body {
     overflow-y: scroll;
     height:450px;
 }
@@ -121,6 +121,7 @@ form {
 /* Loading animation */
 /***************/
 /***************/
+
 .beer_text {
   font-family: 'futura';
   color: white;

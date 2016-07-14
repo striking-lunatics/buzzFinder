@@ -37,13 +37,13 @@ export default class BreweryItem extends React.Component {
 
    render() {
 
-      let close = () => this.setState({show: false});
+      let close = () => {this.setState({show: false}); $("body").removeClass("modal-open")};
       var self = this;
-      //console.log("this.state.beers", this.state.beers)
+
       return (
 
          <div className="list-group breweryList">
-            <a className="list-group-item" onClick={() => this.setState({show: true})}>
+            <a className="list-group-item" onClick={() => {this.setState({show: true}); $("body").addClass("modal-open");}}>
                {this.props.name}
                <span className="distance pull-right">{`${this.props.distance} miles`}</span>
             </a>
@@ -67,9 +67,13 @@ export default class BreweryItem extends React.Component {
                   <a href={this.props.url} target='_blank'>
                      <img className='center-block img-circle' src={this.props.image || 'http://www.frenchtoastsunday.com/wp-content/uploads/2015/02/beer-icon.png'} alt={this.props.name}/>
                   </a>
-                  <br/> {this.props.description || 'No description'}
+                  <h4>Description</h4>
+                  <div className='description'>
+                  {this.props.description || 'No description'}
+                  </div>
 
                   {/* <BeerList breweryID={this.props.id}/> */}
+
                   <BeerList beers={self.state.beers}/>
                </Modal.Body>
                <Modal.Footer>
