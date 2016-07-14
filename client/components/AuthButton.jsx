@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Button, Modal} from "react-bootstrap";
-import AuthPanel from './AuthPanel.jsx';
+import Signup from './signUp.jsx';
+import Login from './logIn.jsx';
 
 export default class AuthButton extends React.Component {
 
@@ -28,7 +29,7 @@ export default class AuthButton extends React.Component {
                   <Modal.Title id="contained-modal-title">Login</Modal.Title>
                </Modal.Header>
                <Modal.Body>
-                  <AuthPanel/>
+                  <Login />
                   <SignUp closeLoginPanel= {() => this.setState({ show: false})}/>
                </Modal.Body>
                <Modal.Footer>
@@ -48,9 +49,7 @@ class SignUp extends React.Component {
          show: false
       };
    }
-
    render() {
-
       let close = () => this.setState({show: false});
 
       return (
@@ -78,7 +77,7 @@ class SignUp extends React.Component {
                   <Modal.Title id="contained-modal-title">Sign Up</Modal.Title>
                </Modal.Header>
                <Modal.Body>
-                  <AuthPanel/>
+                  <Signup />
                </Modal.Body>
                <Modal.Footer>
                   <button type='button' className='btn btn-primary' onClick={close}>Close</button>

@@ -51,12 +51,3 @@ exports.down = function(knex, Promise) {
       knex.schema.dropTable('beer_likes')
   ])
 };
-
-
-
-
-
-
-
-
-
