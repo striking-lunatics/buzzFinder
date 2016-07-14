@@ -497,8 +497,8 @@ form {
 
 @media only screen and (max-width: 768px) {
     body {
-        background: url('beerbg-sm.jpg') no-repeat center bottom fixed;
-        background-color: black !important;
+       /* background: url('beerbg-sm.jpg') no-repeat center bottom fixed;*/
+        background: black !important;
     }
     .heading h1 {
         margin-top: 0;
