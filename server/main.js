@@ -5,6 +5,7 @@ const db = require('./db');
 const Brewery = require('./models/brewery.js');
 const app = express();
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const request = require('request');
 const API = 'da506aecce47e548b1877f8c6f9be793';
 const LOCATION = {
@@ -32,6 +33,7 @@ function deg2rad(deg) {
 app.use(express.static(path.join(__dirname, "../client/public")));
 
 app.use(bodyParser.json());
+app.use(cookieParser() );
 app.use(bodyParser.urlencoded({
    extended: true
 }));
@@ -204,7 +206,53 @@ app.post('/brewery/like', function(req, res) {
           })
       }
     }) 
-})
+}) 
+
+app.get('/user/likes', function(req, res) {
+
+  // console.log("showing header:",req.headers.user); 
+  var userId = parseInt(req.headers.user);
+  Brewery.getLikedBeers(userId)
+    .then(function(breweries) {
+
+      var promises = breweries.map(function(brewery, index) {
+
+        return new Promise(function(resolve, reject) {
+
+          console.log("showing id:",breweries[index].id);
+          var url = 'http://api.brewerydb.com/v2/brewery/' + breweries[index].id + '/?key=da506aecce47e548b1877f8c6f9be793'
+        
+          request(url, function(error, response, body) {
+
+            if (!error && response.statusCode == 200) {
+             var data = JSON.parse(body);
+             console.log("data from api brewery id call:", data.data.name);
+             resolve(data.data.name)
+            }
+          })
+       
+        });
+
+      })
+    
+      Promise.all(promises).then(function(value) { console.log("showing inside promise.all:", value);});
+    })
+});
+
+
+// request(geoURL, function(error, response, body) {
+//       if (!error && response.statusCode == 200) {
+//          var data = JSON.parse(body);
+//          if (data.results[0]) {
+//             lat = data.results[0].geometry.location.lat;
+//             long = data.results[0].geometry.location.lng;
+//          }
+//       } else {
+//          console.log("error: ", error)
+//       }
+//    })
+
+// http://api.brewerydb.com/v2/brewery/rkmM7h/?key=da506aecce47e548b1877f8c6f9be793
 
 var port = process.env.PORT || 1337;
 app.listen(port);

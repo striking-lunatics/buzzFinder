@@ -21,11 +21,6 @@ Brewery.create = function(breweryId, userId) {
 
 			return err;
 		})
-	
-	// return db('breweries').insert({id: breweryId, likes: 1})
-	// 	.then(function() {
-	// 		return db('breweries').select('*').where('id','=', breweryId)
-	// 	})
 		
 }
 
@@ -73,10 +68,23 @@ Brewery.findById = function(breweryId) {
 	return db('breweries').select('*').where('id','=', breweryId)
 } 
 
+
+Brewery.getLikedBeers = function(userId) {
+
+	return db('brewery_likes').select('brewery_id').where("user_id", "=", userId)
+		.then(function(breweries) {
+			var breweryIds = breweries.map((brewery) => brewery.brewery_id); 
+			console.log("showing after mapped:", breweryIds);
+			return db.select('*').from('breweries').whereIn('id', breweryIds)
+		})
+}
+
+
 function joinInsert(breweryId, userId) {
 
 	return db('brewery_likes').insert({brewery_id: breweryId, user_id: userId})
 }
+
 
 
 // Link.all = function () {
