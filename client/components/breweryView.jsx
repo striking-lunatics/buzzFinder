@@ -1,8 +1,26 @@
 import React from 'react';
 import {Button, Modal} from 'react-bootstrap';
 import BeerList from './BeerList.jsx';
+import $ from 'jquery'
 
-export default class BreweryView extends React.Component {
+export default class BreweryView extends React.Component { 
+
+
+  _like(breweryId) {
+      $.ajax({
+         url: '/brewery/like',
+         type: 'POST',
+         contentType: 'application/json',
+         data: JSON.stringify({breweryId: breweryId}),
+         dataType: 'json',
+         success: function(data){
+            console.log("brewery successfully liked:", data);
+         },
+         error: function(err){
+            console.log('error:', err);
+         }
+      });
+   }
 
    render() {
 
@@ -39,8 +57,7 @@ export default class BreweryView extends React.Component {
                      <button type='button' className='btn btn-primary' onClick={this.props.prevView}>
                         &larr; Prev
                      </button>
-                     <button type='button' className='btn btn-primary heart' onClick={(e) => {
-                        e.preventDefault()}}>
+                     <button type='button' className='btn btn-primary heart' onClick={(e) => this._like(this.props.company.brewery.id)}>
                         &hearts;
                      </button>
                      {/*here is our state (test): {this.props.city}*/}
