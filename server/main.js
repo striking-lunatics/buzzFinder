@@ -185,29 +185,37 @@ app.post('/city', function(req, res) {
 //add like to database brewery table and user table
 app.post('/brewery/like', function(req, res) {
 
+  console.log("got like request:", req.cookies);  
+  Session.findById(req.cookies.sessionId)
+    .then(function(data) {
+      console.log("returned from session.findById:", data); 
 
-  Brewery.findById(req.body.breweryId)
-    .then(function(breweryData) {
+      var userId = data.user_id;
+      
+      Brewery.findById(req.body.breweryId)
+        .then(function(breweryData) {
 
-      if(breweryData.length === 0) {
+          if(breweryData.length === 0) {
 
-        Brewery.create(req.body.breweryId, req.body.userId)
-        .then(function(data) { 
+            Brewery.create(req.body.breweryId, userId)
+            .then(function(data) { 
 
-          res.send(201, data[0]); 
-        })
-      }
+              res.send(201, data[0]); 
+            })
+          }
 
-      else {
-        Brewery.incrementLikes(req.body.breweryId, req.body.userId)
-          .then(function(data) { 
-            if(!data[0]) {
-              res.send(400, "error: user has already liked this brewery!")
-            }
-            res.send(201, data[0]);
-          })
-      }
-    }) 
+          else {
+            Brewery.incrementLikes(req.body.breweryId, userId)
+              .then(function(data) { 
+                if(!data[0]) {
+                  res.send(400, "error: user has already liked this brewery!")
+                }
+                res.send(201, data[0]);
+              })
+          }
+        }) 
+    })
+
 }) 
 
 app.get('/user/likes', function(req, res) {
