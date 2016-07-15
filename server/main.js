@@ -218,36 +218,36 @@ app.post('/brewery/like', function(req, res) {
 
 }) 
 
-app.get('/user/likes', function(req, res) {
+// app.get('/user/likes', function(req, res) {
 
-  // console.log("showing header:",req.headers.user); 
-  var userId = parseInt(req.headers.user);
-  Brewery.getLikedBeers(userId)
-    .then(function(breweries) {
+//   // console.log("showing header:",req.headers.user); 
+//   var userId = parseInt(req.headers.user);
+//   Brewery.getLikedBeers(userId)
+//     .then(function(breweries) {
 
-      var promises = breweries.map(function(brewery, index) {
+//       var promises = breweries.map(function(brewery, index) {
 
-        return new Promise(function(resolve, reject) {
+//         return new Promise(function(resolve, reject) {
 
-          console.log("showing id:",breweries[index].id);
-          var url = 'http://api.brewerydb.com/v2/brewery/' + breweries[index].id + '/?key=da506aecce47e548b1877f8c6f9be793'
+//           console.log("showing id:",breweries[index].id);
+//           var url = 'http://api.brewerydb.com/v2/brewery/' + breweries[index].id + '/?key=da506aecce47e548b1877f8c6f9be793'
         
-          request(url, function(error, response, body) {
+//           request(url, function(error, response, body) {
 
-            if (!error && response.statusCode == 200) {
-             var data = JSON.parse(body);
-             console.log("data from api brewery id call:", data.data.name);
-             resolve(data.data.name)
-            }
-          })
+//             if (!error && response.statusCode == 200) {
+//              var data = JSON.parse(body);
+//              console.log("data from api brewery id call:", data.data.name);
+//              resolve(data.data.name)
+//             }
+//           })
        
-        });
+//         });
 
-      })
+//       })
     
-      Promise.all(promises).then(function(value) { console.log("showing inside promise.all:", value);});
-    })
-});
+//       Promise.all(promises).then(function(value) { console.log("showing inside promise.all:", value);});
+//     })
+// });
 
 
 app.get('/login', function(req, res) {
@@ -282,7 +282,13 @@ app.post('/login', function(req, res) {
                     res.send(400, "user is already logged in!")
                   }
                   else {
-                    res.cookie('sessionId', newSessionInfo.id).sendStatus(201);  
+                    retrieveLikes(user.id)
+                      .then(function(breweryData) {
+                        console.log("showing brewery data:", breweryData);
+                        res.cookie('sessionId', newSessionInfo.id) 
+                        res.send(201, breweryData);
+                      })
+                    // res.cookie('sessionId', newSessionInfo.id).sendStatus(201);  
                   }
                 })
             }
@@ -290,6 +296,38 @@ app.post('/login', function(req, res) {
       }
     });
 });
+
+
+function retrieveLikes(userId) {
+
+  // console.log("showing header:",req.headers.user); 
+  // var userId = parseInt(req.headers.user);
+  return Brewery.getLikedBeers(userId)
+    .then(function(breweries) {
+
+      var promises = breweries.map(function(brewery, index) {
+
+        return new Promise(function(resolve, reject) {
+
+          console.log("showing id:",breweries[index].id);
+          var url = 'http://api.brewerydb.com/v2/brewery/' + breweries[index].id + '/?key=da506aecce47e548b1877f8c6f9be793'
+        
+          request(url, function(error, response, body) {
+
+            if (!error && response.statusCode == 200) {
+             var data = JSON.parse(body);
+             // console.log("data from api brewery id call:", data.data);
+             resolve(data.data)
+            }
+          })
+       
+        });
+
+      })
+    
+      return Promise.all(promises);
+    })
+}
 
 app.get('/logout', function(req, res) {
   Session.destroy( req.cookies.sessionId )
