@@ -73,7 +73,7 @@ app.post('/location', function(req, res) {
 
    request(URL, function(error, response, body) {
       if (!error && response.statusCode == 200) {
-         console.log('/location: Sending Data')
+         //console.log('/location: Sending Data')
          res.send(JSON.parse(body));
       } else {
          console.log("/location error: ", error)
@@ -92,7 +92,7 @@ app.post('/brewery/beer', function(req, res) {
    request(URL, function(error, response, body) {
       if (!error && response.statusCode == 200) {
          //console.log(JSON.parse(body))
-         console.log('/brewery/beer: Sending Data')
+         //console.log('/brewery/beer: Sending Data')
          res.send(JSON.parse(body));
       } else {
          console.log("/brewery/beer error: ", error)
@@ -112,7 +112,7 @@ app.post('/beer/brewery', function(req, res) {
       console.log("2: ", body)
       if (!error && response.statusCode == 200) {
 
-         console.log('/beer/brewery: Sending Data')
+         //console.log('/beer/brewery: Sending Data')
          res.send(JSON.parse(body));
       } else {
          console.log("/beer/brewery error: ", error)
@@ -160,7 +160,7 @@ app.post('/city', function(req, res) {
       fetchLocation();
       if (!error && response.statusCode == 200) {
 
-         console.log('/city: Sending Data');
+         //console.log('/city: Sending Data');
 
          // this api call does not return distance
          // use helper function to calc and insert into object then send to client

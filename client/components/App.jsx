@@ -66,7 +66,10 @@ export default class App extends React.Component {
 
    // setState with brewery data
    _fetchBrewerysByLocation(brewerys) {
-      this.setState({brewerys: brewerys.data});
+
+      const filteredBrewerys = brewerys.data.filter((beer) => beer.streetAddress && beer.openToPublic == "Y" && beer.locationType != "office" && beer.brewery.images && beer.brewery.images.squareMedium);
+
+      this.setState({brewerys: filteredBrewerys});
       // console.log(" brewerys.data", brewerys.data)
       // we now can use this data in the child components
       // this.props.brewerys
