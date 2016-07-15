@@ -18,11 +18,11 @@ export default class Login extends React.Component {
          contentType: 'application/json',
          data: JSON.stringify(attrs),
          dataType: 'json',
-         success: function(){
-            alert('success')
+         success: function(data){
+            console.log("saved user likes returned from login:", data);
          },
          error: function(err){
-            alert('error')
+            console.log('error:', err);
          }
       });
    }

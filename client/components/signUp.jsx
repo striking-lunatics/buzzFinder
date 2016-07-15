@@ -12,7 +12,8 @@ export default class Signup extends React.Component {
          password: ''
       };
    }
-     _signUp(attrs) {
+     _signUp(attrs) { 
+      console.log("signup submit clicked!");
       $.ajax({
          url: '/signup',
          type: 'POST',
@@ -20,10 +21,11 @@ export default class Signup extends React.Component {
          data: JSON.stringify(attrs),
          dataType: 'json',
          success: function(){
+            console.log("get back signup response from server:");
             alert('success')
          },
          error: function(err){
-            alert('error')
+            console.log('error:', err);
          }
       });
    }
