@@ -4,9 +4,12 @@ var bcrypt = require('bcrypt-nodejs');
 
 var User = module.exports
 
-User.findByUsername = function (username) {
-  return db('users').where({ username: username }).limit(1)
-    .then(function (rows) {
+User.findByUsername = function (username) { 
+
+  console.log("inside findByUsername:", username);
+  return db('users').where('username', '=', username)
+    .then(function (rows) { 
+      console.log("returned from users check:", rows);
       return rows[0]
     })
 }
@@ -52,7 +55,8 @@ User.comparePassword = function (passwordHashFromDatabase, attemptedPassword) {
 
   return new Promise(function (resolve, reject) {
 
-    bcrypt.compare(attemptedPassword, passwordHashFromDatabase, function(err, res) {
+    bcrypt.compare(attemptedPassword, passwordHashFromDatabase, function(err, res) { 
+      console.log("inside bcrypt.compare:", err, res);
       if (err) reject(err)
       else     resolve(res)
     });

@@ -74,7 +74,7 @@ Brewery.getLikedBeers = function(userId) {
 	return db('brewery_likes').select('brewery_id').where("user_id", "=", userId)
 		.then(function(breweries) {
 			var breweryIds = breweries.map((brewery) => brewery.brewery_id); 
-			console.log("showing after mapped:", breweryIds);
+			// console.log("showing after mapped:", breweryIds);
 			return db.select('*').from('breweries').whereIn('id', breweryIds)
 		})
 }

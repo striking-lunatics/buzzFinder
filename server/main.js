@@ -248,28 +248,34 @@ app.get('/login', function(req, res) {
 
 app.post('/login', function(req, res) {
   var username = req.body.username;
-  var password = req.body.password;
+  var password = req.body.password; 
+
+  console.log("inside logn endpoint:", username);
 
   User.findByUsername( username )
     .then(function(user) {
-
+      console.log("showing user:", user);
       if ( ! user ) {
-        res.redirect('/login');
+        res.send(400, 'user does not exist! please re-login or signup.');
       }
       else {
-        User.comparePassword( user.password_hash, password )
+        User.comparePassword( user.password, password )
           .then(function (isMatch) {
 
             if ( ! isMatch ) {
               console.log("Incorrect password")
-              res.redirect('/login');
+              res.send(400, 'password is incorrect! please reenter');
 
             } else {
               Session.create( user.id )
-                .then(function (newSession) {
-                  // http://expressjs.com/en/api.html#res.cookie
-                  res.cookie('sessionId', newSession.id);
-                  return res.redirect('/');
+                .then(function (newSessionInfo) { 
+                  console.log("showing newSessionInfo:", newSessionInfo); 
+                  if(!newSessionInfo.id) {
+                    res.send(400, "user is already logged in!")
+                  }
+                  else {
+                    res.cookie('sessionId', newSessionInfo.id).sendStatus(201);  
+                  }
                 })
             }
           });
@@ -298,8 +304,8 @@ app.post('/signup', function(req, res) {
     .then(function(user) { 
       console.log("found by username:", username);
       if ( user ) {
-        console.log('Account already exists');
-        res.redirect('/signup');
+        res.send(400, 'account already exists!');
+        // res.redirect('/signup');
       }
       else {
         User.create({
@@ -311,10 +317,10 @@ app.post('/signup', function(req, res) {
             return Session.create(newUserId);
           })
           .then(function (newSession) { 
-            console.log(newSession);
+            console.log("showing next session:",newSession);
             // http://expressjs.com/en/api.html#res.cookie
             res.cookie('sessionId', newSession.id).sendStatus(201);
-            // res.send(201);
+            // res.sendStatus(201);
           })
       }
     })

@@ -6,6 +6,8 @@ var Session = module.exports
 
 Session.create = function (userId) { 
 
+  console.log("made it to session.create:", userId);
+
   console.log("inside session.create!");
 
   var newSession = { id: uuid(), user_id: userId } 
@@ -15,6 +17,9 @@ Session.create = function (userId) {
   return db('sessions').insert(newSession)
     .then(function () {
       return newSession
+    })
+    .catch(function(err) {
+      return err;
     })
   }
 
