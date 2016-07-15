@@ -21,22 +21,31 @@ User.findById = function (id) {
 User.create = function (incomingAttrs) {
 
   // Copy object to avoid mutation
+  console.log("inside user.create! :", incomingAttrs);
   var attrs = Object.assign({}, incomingAttrs);
 
 
   return hashPassword(attrs.password)
     .then(function (passwordHash) {
 
-      attrs.password_hash = passwordHash
-      delete attrs.password
-
+      attrs.password = passwordHash;
+      // delete attrs.password
+      console.log("inside hashPassword! :", attrs);
       return db('users').insert(attrs)
     })
-    .then(function (result) {
-      // Prepare new user for the outside world
-      attrs.id = result[0];
-      return attrs;
-    });
+    .then(function () { 
+      return db('users').select('id').where('username', '=', attrs.username)
+        .then(function(selected) {
+          return selected[0].id;
+        })
+      // console.log("immediately after insert:", result);
+      // // Prepare new user for the outside world
+      // attrs.id = result[0];
+      // return attrs;
+    })
+    .catch(function(err) {
+      console.log("error inserting new user! :", err);
+    })
   };
 
 User.comparePassword = function (passwordHashFromDatabase, attemptedPassword) {

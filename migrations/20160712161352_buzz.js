@@ -21,7 +21,7 @@ exports.up = function(knex, Promise) {
 
     knex.schema.createTable('sessions', function(table){
         table.string('id').primary();
-        table.string('username').unique();
+        table.integer('user_id').unique();
     }),
 
    knex.schema.createTable('brewery_likes', function(table){  
