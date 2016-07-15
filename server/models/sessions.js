@@ -4,9 +4,13 @@ var uuid = require('node-uuid');
 
 var Session = module.exports
 
-Session.create = function (userId) {
+Session.create = function (userId) { 
 
-  var newSession = { id: uuid(), user_id: userId }
+  console.log("inside session.create!");
+
+  var newSession = { id: uuid(), user_id: userId } 
+
+  console.log("showing new session info:", newSession);
 
   return db('sessions').insert(newSession)
     .then(function () {

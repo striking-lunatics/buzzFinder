@@ -18,11 +18,11 @@ export default class Login extends React.Component {
          contentType: 'application/json',
          data: JSON.stringify(attrs),
          dataType: 'json',
-         success: function(){
+         success: function(data){
             alert('success')
          },
          error: function(err){
-            alert('error')
+            console.log('error:', err);
          }
       });
    }

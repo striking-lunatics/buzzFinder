@@ -3,6 +3,8 @@ const path = require('path');
 const browserify = require('browserify-middleware');
 const db = require('./db');
 const Brewery = require('./models/brewery.js');
+const User = require('./models/users.js');
+const Session = require('./models/sessions.js');
 const app = express();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -240,19 +242,118 @@ app.get('/user/likes', function(req, res) {
 });
 
 
-// request(geoURL, function(error, response, body) {
-//       if (!error && response.statusCode == 200) {
-//          var data = JSON.parse(body);
-//          if (data.results[0]) {
-//             lat = data.results[0].geometry.location.lat;
-//             long = data.results[0].geometry.location.lng;
-//          }
-//       } else {
-//          console.log("error: ", error)
-//       }
-//    })
+app.get('/login', function(req, res) {
+  res.render('login');
+});
 
-// http://api.brewerydb.com/v2/brewery/rkmM7h/?key=da506aecce47e548b1877f8c6f9be793
+app.post('/login', function(req, res) {
+  var username = req.body.username;
+  var password = req.body.password;
+
+  User.findByUsername( username )
+    .then(function(user) {
+
+      if ( ! user ) {
+        res.redirect('/login');
+      }
+      else {
+        User.comparePassword( user.password_hash, password )
+          .then(function (isMatch) {
+
+            if ( ! isMatch ) {
+              console.log("Incorrect password")
+              res.redirect('/login');
+
+            } else {
+              Session.create( user.id )
+                .then(function (newSession) {
+                  // http://expressjs.com/en/api.html#res.cookie
+                  res.cookie('sessionId', newSession.id);
+                  return res.redirect('/');
+                })
+            }
+          });
+      }
+    });
+});
+
+app.get('/logout', function(req, res) {
+  Session.destroy( req.cookies.sessionId )
+    .then(function () {
+      res.clearCookie('sessionId');
+      res.redirect('/login');
+    })
+});
+
+app.get('/signup', function(req, res) {
+  res.render('signup');
+});
+
+app.post('/signup', function(req, res) { 
+  console.log("received request for sign up!");
+  var username = req.body.username;
+  var password = req.body.password;
+
+  User.findByUsername( username )
+    .then(function(user) { 
+      console.log("found by username:", username);
+      if ( user ) {
+        console.log('Account already exists');
+        res.redirect('/signup');
+      }
+      else {
+        User.create({
+          username: username,
+          password: password
+        })
+          .then(function(newUserId) { 
+            console.log("inserted new user! :", newUserId);
+            return Session.create(newUserId);
+          })
+          .then(function (newSession) { 
+            console.log(newSession);
+            // http://expressjs.com/en/api.html#res.cookie
+            res.cookie('sessionId', newSession.id).sendStatus(201);
+            // res.send(201);
+          })
+      }
+    })
+});
+
+function getSignedInUser (req, res, next) {
+  var sessionId = req.cookies && req.cookies.sessionId
+
+  if ( ! sessionId ) {
+    res.redirect('/login');
+  }
+  else {
+    //
+    // This could be simplified to one query / db call.
+    // See if you can find out how!
+    //
+    Session.findById( sessionId )
+      .then(function (session) {
+        if ( ! session ) {
+          console.log("invalid session")
+          res.redirect('/login')
+        }
+        else {
+          return User.findById( session.user_id )
+            .then(function (user) {
+              if ( ! user ) {
+                console.log("invalid session (no such user)")
+                res.redirect('/login')
+              }
+              else {
+                req.user = user
+                next();
+              }
+            })
+        }
+      })
+  }
+};
+
 
 var port = process.env.PORT || 1337;
 app.listen(port);
