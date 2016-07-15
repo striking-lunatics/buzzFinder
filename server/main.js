@@ -182,7 +182,7 @@ app.post('/city', function(req, res) {
    })
 }); 
 
-//add like to database brewery table and user table
+//add like to database brewery table and brewery-likes join table if user has not previously liked the same brewery
 app.post('/brewery/like', function(req, res) {
 
   console.log("got like request:", req.cookies);  
@@ -215,45 +215,10 @@ app.post('/brewery/like', function(req, res) {
           }
         }) 
     })
-
 }) 
 
-// app.get('/user/likes', function(req, res) {
 
-//   // console.log("showing header:",req.headers.user); 
-//   var userId = parseInt(req.headers.user);
-//   Brewery.getLikedBeers(userId)
-//     .then(function(breweries) {
-
-//       var promises = breweries.map(function(brewery, index) {
-
-//         return new Promise(function(resolve, reject) {
-
-//           console.log("showing id:",breweries[index].id);
-//           var url = 'http://api.brewerydb.com/v2/brewery/' + breweries[index].id + '/?key=da506aecce47e548b1877f8c6f9be793'
-        
-//           request(url, function(error, response, body) {
-
-//             if (!error && response.statusCode == 200) {
-//              var data = JSON.parse(body);
-//              console.log("data from api brewery id call:", data.data.name);
-//              resolve(data.data.name)
-//             }
-//           })
-       
-//         });
-
-//       })
-    
-//       Promise.all(promises).then(function(value) { console.log("showing inside promise.all:", value);});
-//     })
-// });
-
-
-app.get('/login', function(req, res) {
-  res.render('login');
-});
-
+//retrieve user's previously liked breweries upon successful login
 app.post('/login', function(req, res) {
   var username = req.body.username;
   var password = req.body.password; 
@@ -287,8 +252,7 @@ app.post('/login', function(req, res) {
                         console.log("showing brewery data:", breweryData);
                         res.cookie('sessionId', newSessionInfo.id) 
                         res.send(201, breweryData);
-                      })
-                    // res.cookie('sessionId', newSessionInfo.id).sendStatus(201);  
+                      }) 
                   }
                 })
             }
@@ -297,12 +261,13 @@ app.post('/login', function(req, res) {
     });
 });
 
+//Helper function called at the end of app.post('/login'). 
+//Upon a successful login it retrieves ids of the user's previously liked breweries and then 
+//does api calls for each one, returning an array of promised brewery data 
 
 function retrieveLikes(userId) {
 
-  // console.log("showing header:",req.headers.user); 
-  // var userId = parseInt(req.headers.user);
-  return Brewery.getLikedBeers(userId)
+  return Brewery.getLikedBreweries(userId)
     .then(function(breweries) {
 
       var promises = breweries.map(function(brewery, index) {
@@ -323,8 +288,7 @@ function retrieveLikes(userId) {
        
         });
 
-      })
-    
+      })  
       return Promise.all(promises);
     })
 }
@@ -337,10 +301,6 @@ app.get('/logout', function(req, res) {
     })
 });
 
-app.get('/signup', function(req, res) {
-  res.render('signup');
-});
-
 app.post('/signup', function(req, res) { 
   console.log("received request for sign up!");
   var username = req.body.username;
@@ -351,7 +311,6 @@ app.post('/signup', function(req, res) {
       console.log("found by username:", username);
       if ( user ) {
         res.send(400, 'account already exists!');
-        // res.redirect('/signup');
       }
       else {
         User.create({
@@ -364,9 +323,7 @@ app.post('/signup', function(req, res) {
           })
           .then(function (newSession) { 
             console.log("showing next session:",newSession);
-            // http://expressjs.com/en/api.html#res.cookie
             res.cookie('sessionId', newSession.id).sendStatus(201);
-            // res.sendStatus(201);
           })
       }
     })
@@ -379,10 +336,7 @@ function getSignedInUser (req, res, next) {
     res.redirect('/login');
   }
   else {
-    //
-    // This could be simplified to one query / db call.
-    // See if you can find out how!
-    //
+    
     Session.findById( sessionId )
       .then(function (session) {
         if ( ! session ) {
@@ -410,13 +364,6 @@ function getSignedInUser (req, res, next) {
 var port = process.env.PORT || 1337;
 app.listen(port);
 console.log("Listening on localhost:" + port);
-
-
-
-
-
-
-
 
 
 
