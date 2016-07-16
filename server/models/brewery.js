@@ -69,7 +69,7 @@ Brewery.findById = function(breweryId) {
 } 
 
 
-Brewery.getLikedBeers = function(userId) {
+Brewery.getLikedBreweries = function(userId) {
 
 	return db('brewery_likes').select('brewery_id').where("user_id", "=", userId)
 		.then(function(breweries) {
