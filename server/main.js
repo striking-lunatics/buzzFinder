@@ -308,30 +308,53 @@ function retrieveLikedBreweries(userId) {
     })
 }
 
+// function includeBreweryLikes(companies) {
+
+//   console.log("showing breweries:", companies);
+
+//   var breweriesWithLikes = companies.map(function(company) {
+
+//     return new Promise(function(resolve, reject) {
+
+//       db('breweries').select('*').where('id', '=', company.brewery.id)
+//         .then(function(rows) { 
+
+//           console.log("showing rows:", rows);
+
+//           if(rows.length === 0) {
+//             company.brewery.likes = 0;
+//           }
+//           else {
+//             company.brewery.likes = rows[0].likes;
+//           }
+//           resolve(company)
+//         })
+//     })
+//   })
+
+//   return Promise.all(breweriesWithLikes);
+// }
+
 function includeBreweryLikes(companies) {
 
-  console.log("showing breweries:", companies);
+  // console.log("showing breweries:", companies);
 
   var breweriesWithLikes = companies.map(function(company) {
 
-    return new Promise(function(resolve, reject) {
+    return db('breweries').select('*').where('id', '=', company.brewery.id)
+      .then(function(rows) { 
 
-      db('breweries').select('*').where('id', '=', company.brewery.id)
-        .then(function(rows) { 
+        console.log("showing rows:", rows);
 
-          console.log("showing rows:", rows);
-
-          if(rows.length === 0) {
-            company.brewery.likes = 0;
-          }
-          else {
-            company.brewery.likes = rows[0].likes;
-          }
-          resolve(company)
-        })
-    })
+        if(rows.length === 0) {
+          company.brewery.likes = 0;
+        }
+        else {
+          company.brewery.likes = rows[0].likes;
+        }
+        return company;
+      })
   })
-
   return Promise.all(breweriesWithLikes);
 }
 
