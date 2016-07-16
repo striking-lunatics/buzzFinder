@@ -316,7 +316,7 @@ function includeBreweryLikes(companies) {
 
     return new Promise(function(resolve, reject) {
 
-      db('breweries').select('*').where('id', '=', company  .brewery.id)
+      db('breweries').select('*').where('id', '=', company.brewery.id)
         .then(function(rows) { 
 
           console.log("showing rows:", rows);
