@@ -45,7 +45,7 @@ export default class BreweryItem extends React.Component {
    render() {
       // let close = () => {this.setState({show: false}); $("body").removeClass("modal-open")};
       // var self = this;
-
+      console.log(this.props.likes);
       return (
 
          <div className="list-group breweryList">

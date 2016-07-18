@@ -49,7 +49,8 @@ export default class BreweryList extends React.Component {
    _createBreweryView() {
     if (this.props.brewerys) {
       return this.props.brewerys.map((beer, index) => {
-        return <BreweryItem
+        return <BreweryItem 
+          likes={beer.brewery.likes}
           key={index}
           viewId={index}
           breweryID={beer.id}
