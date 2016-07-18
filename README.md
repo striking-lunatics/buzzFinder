@@ -32,7 +32,7 @@ Install pgAdmin3 here - ***https://www.pgadmin.org***.
 
 Once postcress.app is installed you should see a small elephant icon in the upper right corner of your desktop. Click it, then click 'open psql'. Doing this will start a psql server on your computer. 
 
-pgAdmin3 is a tool used to view your database in a table format. It is a convienent way to visually refrence the database.
+pgAdmin3 is a tool used to view your database in a table format. It is a convienent way to visually reference the database.
 
 In order to get the databse up and running, run the following commands in the command line.
 
