@@ -20,6 +20,7 @@ export default class Login extends React.Component {
          dataType: 'json',
          success: function(data){
             alert('You have logged in!')
+            {document.location.reload()}
             console.log("saved user likes returned from login:", data);
          },
          error: function(err){
