@@ -5,20 +5,41 @@ import $ from 'jquery'
 
 export default class BreweryView extends React.Component {
 
+  constructor(props) {
+     super(props);
+     this.state = {
+        islike: false
+     }
+  }
+
   _like(breweryId) {
-      $.ajax({
-         url: '/brewery/like',
-         type: 'POST',
-         contentType: 'application/json',
-         data: JSON.stringify({breweryId: breweryId}),
-         dataType: 'json',
-         success: function(data){
-            console.log("brewery successfully liked:", data);
-         },
-         error: function(err){
-            console.log('error:', err);
-         }
-      });
+      if(document.cookie != '') {
+         $.ajax({
+            url: '/brewery/like',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({breweryId: breweryId}),
+            dataType: 'json',
+            success: function(data){
+               console.log("brewery successfully liked:", data);
+               console.log('this is ~~~~', this)
+              
+            },
+            error: function(err){
+               console.log('error:', err);
+            }
+         });     
+      } else {
+         console.log('You need to log in to like a brewery')
+      }
+   }
+
+   _likeBrewery(breweryId){
+      // this.setState({
+      //   islike: true;
+      // });
+
+      // $(".heart").addClass("disabled");}
    }
 
    render() {
@@ -56,9 +77,13 @@ export default class BreweryView extends React.Component {
                      <button type='button' className='btn btn-primary' onClick={this.props.prevView}>
                         &larr; Prev
                      </button>
-                     <button type='button' className='btn btn-primary heart' onClick={(e) => this._like(this.props.company.brewery.id)}>
+                     {(document.cookie)? 
+                        <button type='button' className='btn btn-primary heart' onClick={
+                           (e) => this._like(this.props.company.brewery.id)
+                        }>
                         &hearts;
-                     </button>
+                     </button>: null}
+                     
                      {/*here is our state (test): {this.props.city}*/}
                      <button type='button' className='btn btn-primary' onClick={this.props.nextView}>
                         Next &rarr;

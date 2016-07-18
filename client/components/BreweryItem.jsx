@@ -16,6 +16,8 @@ export default class BreweryItem extends React.Component {
       return false;
    }
 
+   
+
    render() {
 
       console.log(this.props.likes);
