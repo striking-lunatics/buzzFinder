@@ -3,7 +3,6 @@ var db = require('../db');
 // var util = require('../../lib/utility');
 // var crypto = require('crypto');
 
-
 var Brewery = module.exports;
 
 Brewery.create = function(breweryId, userId) {
