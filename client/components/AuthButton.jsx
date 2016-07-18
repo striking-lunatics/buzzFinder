@@ -29,7 +29,7 @@ export default class AuthButton extends React.Component {
                   <Modal.Title id="contained-modal-title">Login</Modal.Title>
                </Modal.Header>
                <Modal.Body>
-                  <Login />
+                  <Login/>
                   <SignUp closeLoginPanel= {() => this.setState({ show: false})}/>
                </Modal.Body>
                <Modal.Footer>
@@ -77,7 +77,7 @@ class SignUp extends React.Component {
                   <Modal.Title id="contained-modal-title">Sign Up</Modal.Title>
                </Modal.Header>
                <Modal.Body>
-                  <Signup />
+                  <Signup/>
                </Modal.Body>
                <Modal.Footer>
                   <button type='button' className='btn btn-primary' onClick={close}>Close</button>

@@ -11,21 +11,23 @@ export default class BreweryItem extends React.Component {
 
    handleOnClick(event) {
       event.preventDefault();
-       $("body").addClass("modal-open");
+      $("body").addClass("modal-open");
       this.props.selectView(this.props.viewId);
       return false;
    }
 
    render() {
 
-      console.log(this.props.likes);
+      //console.log(this.props.likes);
 
       return (
          <div className="list-group breweryList">
             <a className="list-group-item" onClick={this.handleOnClick}>
-               {this.props.name}              
+               {this.props.name}
                <span className="distance pull-right">{`${this.props.distance} miles`}</span>
-               { (!this.props.likes)? null: <span className="distance pull-right heart">&hearts; x {`${this.props.likes}`}</span>}
+               {(!this.props.likes)
+                  ? null
+                  : <span className="distance pull-right heart">&hearts; x {`${this.props.likes}`}</span>}
             </a>
          </div>
       );
