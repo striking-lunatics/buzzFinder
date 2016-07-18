@@ -61,9 +61,7 @@ class SignUp extends React.Component {
                      Don't have an account?
                   </h5>
                   <button type='button' className='btn btn-primary' onClick={() => {
-                     {/*TO FIX: want to close login panel when signup form shows up*/
-                     }
-                     {/*this.props.closeLoginPanel();*/
+                     {/*Nice to have: want to close login panel when signup form shows up*/
                      }
                      this.setState({show: true});
                   }}>

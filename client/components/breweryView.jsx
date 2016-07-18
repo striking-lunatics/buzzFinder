@@ -5,6 +5,7 @@ import $ from 'jquery'
 
 export default class BreweryView extends React.Component {
 
+    // Make this ajax call when users like a brewery 
    _like(breweryId) {
       $.ajax({
          url: '/brewery/like',
@@ -53,20 +54,17 @@ export default class BreweryView extends React.Component {
                   <div className='description'>
                      {this.props.company.brewery.description || 'No description'}
                   </div>
-                  <BeerList company={this.props.company}/> {/* <BeerList breweryID={this.props.id}/> */}
-
-                  {/*<BeerList beers={self.state.beers}/>*/}
-
+                  <BeerList company={this.props.company}/>
                </Modal.Body>
                <Modal.Footer>
                   <div className='btn-group' role='group'>
                      <button type='button' className='btn btn-primary' onClick={this.props.prevView}>
                         &larr; Prev
                      </button>
+                  {/* This like button is not fully functional: users can like it but cannot unlike it. Also need to disable the button after the users have liked it */}
                      <button type='button' className='btn btn-primary heart' onClick={(e) => this._like(this.props.company.brewery.id)}>
                         &hearts;
                      </button>
-                     {/*here is our state (test): {this.props.city}*/}
                      <button type='button' className='btn btn-primary' onClick={this.props.nextView}>
                         Next &rarr;
                      </button>

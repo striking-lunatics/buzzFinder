@@ -9,6 +9,7 @@ export default class BreweryItem extends React.Component {
       this.handleOnClick = this.handleOnClick.bind(this);
    }
 
+   // This function alerts the BreweryList(parent) component to set state
    handleOnClick(event) {
       event.preventDefault();
       $("body").addClass("modal-open");
@@ -19,8 +20,6 @@ export default class BreweryItem extends React.Component {
    
 
    render() {
-
-      //console.log(this.props.likes);
 
       return (
          <div className="list-group breweryList">

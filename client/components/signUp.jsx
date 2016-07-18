@@ -12,6 +12,8 @@ export default class Signup extends React.Component {
          password: ''
       };
    }
+
+     // Make this ajax call when users click on signup button 
      _signUp(attrs) { 
       console.log("signup submit clicked!");
       $.ajax({
@@ -22,14 +24,15 @@ export default class Signup extends React.Component {
          dataType: 'json',
          success: function(){
             alert('Signup Success!')
-            console.log("get back signup response from server:");
+            //console.log("get back signup response from server:");
          },
          error: function(err){
             if(err.status === 201) {
+            // It hits this line whenever users successfully sign up 
                alert('Signup Success!')
                {document.location.reload()}
             } else {
-               console.log('error:', err);
+               //console.log('error:', err);
             }          
          }
       });
@@ -41,9 +44,6 @@ export default class Signup extends React.Component {
             <form>
                <input className='input-large form-control' value={this.state.username} placeholder="Username..." onChange={(e) => this.setState({username: e.target.value})}/>
                <input className='input-large form-control' value={this.state.password} placeholder='Password...' onChange={(e) => this.setState({password: e.target.value})}/> 
-              {/*uN:{this.state.username}*/}
-              {/*pW:{this.state.password}*/}
-
                <button onClick={(e) => this._signUp({username:this.state.username, password:this.state.password})} type='button' className='btn btn-primary'>Submit</button>
             </form>
          </div>
