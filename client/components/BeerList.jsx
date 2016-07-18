@@ -6,7 +6,8 @@ export default class BeerList extends React.Component {
    constructor(props) {
       super(props);
       this.state = {
-         beers: null
+         beers: null,
+         noBeerData: false
       }
    }
 
@@ -27,6 +28,8 @@ export default class BeerList extends React.Component {
             if (beers.data) {
                self.setState({beers: beers.data});
                //console.log('Beer List', beers.data);
+            } else {
+               self.setState({noBeerData: true});
             }
          }
       });
@@ -39,7 +42,12 @@ export default class BeerList extends React.Component {
             return <BeerItem key={index} name={beer.name} id={beer.id} description={beer.description} abv={beer.abv} ibu={beer.ibu}/>
          });
       } else {
-         return <h2>Loading...</h2>
+        if(!this.state.noBeerData) {
+          return <h2>Loading...</h2>
+        } else {
+          return <h2>No Beers Found</h2>
+        }
+
       }
    }
 
