@@ -85,21 +85,10 @@ export default class App extends React.Component {
 
    // setState with brewery data
    _fetchBrewerysByLocation(brewerys) {
-      //console.log('brewerys before filter~~~~~~~~~', brewerys)
       const filteredBrewerys = brewerys.data.filter((beer) => beer.streetAddress && beer.openToPublic == "Y" && beer.locationType != "office" && beer.brewery.images && beer.brewery.images.squareMedium);
-      //console.log('filteredBrewerys' , filteredBrewerys)
       this.setState({brewerys: filteredBrewerys});
-      // console.log(" brewerys.data", brewerys.data)
-      // we now can use this data in the child components
-      // this.props.brewerys
    }
 
-   _test(e) {
-      // DOESNT WORK
-      console.log(e.key)
-      if (e.key === 'Enter')
-         this._searchByCity();
-      }
 
    _showLoader() {
       this.setState({showLoader: true})
@@ -132,7 +121,7 @@ export default class App extends React.Component {
                <div className='col-sm-7 col-sm-offset-5'>
                   {/*{ Create search box and add two-way bindings }*/}
                   <form>
-                     <input className='input-large form-control' value={this.state.city} onKeyPress={(e) => this._test(e)} onChange={(e) => this.setState({cityState: e.target.value})} type='text' placeholder='Search by city, state.....'/>
+                     <input className='input-large form-control' value={this.state.city}  onChange={(e) => this.setState({cityState: e.target.value})} type='text' placeholder='Search by city, state.....'/>
                      <div className='btn-group' role='group'>
                         <button type='button' className='btn btn-primary' onClick={(e) => {
                            e.preventDefault();
@@ -141,13 +130,11 @@ export default class App extends React.Component {
 
                            Search
                         </button>
-                        {/*here is our state (test): {this.state.city}*/}
                         <button type='button' className='btn btn-primary' onClick={() => {
                            this._getLocation()
                         }}>Update current location</button>
                      </div>
                   </form>
-                  {/*pass App state to BreweryList*/}
                   <BreweryList brewerys={this.state.brewerys} showState={this.state.showLoader}/>
                </div>
             </div>

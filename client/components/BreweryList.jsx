@@ -5,17 +5,18 @@ import $ from 'jquery';
 import Loader from './loadingComponent.jsx';
 const request = require('request');
 
+// This is the brewery list on the main page
 export default class BreweryList extends React.Component {
 
    constructor(props) {
      super(props);
      this.state = {
+      // activeId reflects the brewery the user clicks on
        activeId: undefined
      }
    }
 
    render() {
-    // console.log(this.props.brewerys);
 
       const activeId = this.state.activeId;
       let company;
@@ -30,7 +31,6 @@ export default class BreweryList extends React.Component {
         breweryView = null;
         $("body").removeClass("modal-open");
       } else {
-        //console.log('company~~~~~~',company)
         breweryView = <BreweryView
                 company={company}
                 closeView={this.closeView.bind(this)} 
@@ -50,7 +50,6 @@ export default class BreweryList extends React.Component {
    _createBreweryView() {
     if (this.props.brewerys) {
       return this.props.brewerys.map((beer, index) => {
-        //console.log('likes in brewerylist~~~~~' , beer.brewery.likes)
         return <BreweryItem 
           likes={beer.brewery.likes}
           key={index}
@@ -73,6 +72,7 @@ export default class BreweryList extends React.Component {
     }
    }
 
+   // Below are the helper functions that are used in the BreweryView
    closeView() {
      this.setState({
        activeId: undefined

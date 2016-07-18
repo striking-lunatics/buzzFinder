@@ -1,7 +1,7 @@
 import React from 'react';
 
 class Loader extends React.Component {
-
+   // This is the loading animation 
    render() {
       return (
          <div className="loading">

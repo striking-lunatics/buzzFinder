@@ -12,7 +12,6 @@ body {
     background-size: cover;
     font-family: 'Oswald', sans-serif;
 }
-
 button, .btn:focus, .btn-primary:focus, .btn-primary .focus{
   outline: none;
 }
@@ -20,12 +19,10 @@ body.modal-open {
     overflow:hidden;
     position: fixed;
 }
-
 .breweryList .list-group-item {
     color: #d6760b; 
     cursor: pointer;
 }
-
 .breweryList .list-group-item:hover {
     color: #337ab7;
 }
@@ -94,7 +91,6 @@ form {
 /* Brewery Item Detail */
 /***************/
 /***************/
-
 
 .breweryDetail .modal-body {
     overflow-y: scroll;
