@@ -27,6 +27,7 @@ export default class Signup extends React.Component {
          error: function(err){
             if(err.status === 201) {
                alert('Signup Success!')
+               {document.location.reload()}
             } else {
                console.log('error:', err);
             }          
