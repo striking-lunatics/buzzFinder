@@ -126,6 +126,9 @@ form {
 .heart {
     color: firebrick;
 }
+.pull-right{
+    margin-left: 10px;
+}
 /***************/
 /***************/
 /* Loading animation */
