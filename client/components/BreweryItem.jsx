@@ -17,12 +17,15 @@ export default class BreweryItem extends React.Component {
    }
 
    render() {
+
       console.log(this.props.likes);
+
       return (
          <div className="list-group breweryList">
             <a className="list-group-item" onClick={this.handleOnClick}>
-               {this.props.name}
+               {this.props.name}              
                <span className="distance pull-right">{`${this.props.distance} miles`}</span>
+               { (!this.props.likes)? null: <span className="distance pull-right heart">&hearts; x {`${this.props.likes}`}</span>}
             </a>
          </div>
       );

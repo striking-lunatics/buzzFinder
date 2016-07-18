@@ -63,7 +63,7 @@ app.use(function(req, res, next) {
 
 app.post('/location', function(req, res) {
 
-   console.log(req.body.latitude, req.body.longitude)
+   //console.log(req.body.latitude, req.body.longitude)
       // Get location results with social account information included.
       // withSocialAccounts=Y
       // Radius from point. Defaults to 10 miles.
@@ -79,15 +79,16 @@ app.post('/location', function(req, res) {
          // console.log()
          includeBreweryLikes(parsedBody.data)
             .then(function(breweriesWithLikes) {
-               console.log("showing breweries after likes added:", breweriesWithLikes);
+               //console.log(breweriesWithLikes,"showing breweries after likes added~~~~~~~~~~~~~~" );
                parsedBody.data = breweriesWithLikes
+               //console.log(parsedBody.data,"parsebody~~~~~~~~~~~~~~" );
                res.send(parsedBody);
             })
 
          //console.log('/location: Sending Data')
          // res.send();
       } else {
-         console.log("/location error: ", error)
+         //console.log("/location error: ", error)
       }
    })
 });
@@ -106,7 +107,7 @@ app.post('/brewery/beer', function(req, res) {
          //console.log('/brewery/beer: Sending Data')
          res.send(JSON.parse(body));
       } else {
-         console.log("/brewery/beer error: ", error)
+         //console.log("/brewery/beer error: ", error)
       }
    })
 });
@@ -115,18 +116,18 @@ app.post('/beer/brewery', function(req, res) {
 
    const beerID = req.body.beerId
 
-   console.log("1: ", beerID)
+   //console.log("1: ", beerID)
 
    const URL = `http://api.brewerydb.com/v2/beer/${beerID}/breweries?key=${API}`;
 
    request(URL, function(error, response, body) {
-      console.log("2: ", body)
+      //console.log("2: ", body)
       if (!error && response.statusCode == 200) {
 
          //console.log('/beer/brewery: Sending Data')
          res.send(JSON.parse(body));
       } else {
-         console.log("/beer/brewery error: ", error)
+         //console.log("/beer/brewery error: ", error)
       }
    })
 });
@@ -162,7 +163,7 @@ app.post('/city', function(req, res) {
             long = data.results[0].geometry.location.lng;
          }
       } else {
-         console.log("/city error: ", error)
+         //console.log("/city error: ", error)
       }
    })
 
@@ -181,14 +182,14 @@ app.post('/city', function(req, res) {
          var body = JSON.parse(body);
          if (body.data) {
             //console.log(body.data)
-            console.log('distance Miles: ', distanceMiles);
+            //console.log('distance Miles: ', distanceMiles);
             body.data.forEach(brewery => brewery.distance = distanceMiles);
             res.send(body);
          } else {
-            console.log('/city: Error');
+            //console.log('/city: Error');
          }
       } else {
-         console.log("/city error: ", error)
+         //console.log("/city error: ", error)
       }
    })
 });
@@ -196,10 +197,10 @@ app.post('/city', function(req, res) {
 //add like to database brewery table and brewery-likes join table if user has not previously liked the same brewery
 app.post('/brewery/like', function(req, res) {
 
-   console.log("got like request:", req.cookies);
+   //console.log("got like request:", req.cookies);
    Session.findById(req.cookies.sessionId)
       .then(function(data) {
-         console.log("returned from session.findById:", data);
+         //console.log("returned from session.findById:", data);
 
          var userId = data.user_id;
 
@@ -231,11 +232,11 @@ app.post('/login', function(req, res) {
    var username = req.body.username;
    var password = req.body.password;
 
-   console.log("inside logn endpoint:", username);
+   //console.log("inside logn endpoint:", username);
 
    User.findByUsername(username)
       .then(function(user) {
-         console.log("showing user:", user);
+         //console.log("showing user:", user);
          if (!user) {
             res.send(400, 'user does not exist! please re-login or signup.');
          } else {
@@ -243,19 +244,19 @@ app.post('/login', function(req, res) {
                .then(function(isMatch) {
 
                   if (!isMatch) {
-                     console.log("Incorrect password")
+                     //console.log("Incorrect password")
                      res.send(400, 'password is incorrect! please reenter');
 
                   } else {
                      Session.create(user.id)
                         .then(function(newSessionInfo) {
-                           console.log("showing newSessionInfo:", newSessionInfo);
+                           //console.log("showing newSessionInfo:", newSessionInfo);
                            if (!newSessionInfo.id) {
                               res.send(400, "user is already logged in!")
                            } else {
                               retrieveLikedBreweries(user.id)
                                  .then(function(breweryData) {
-                                    console.log("showing brewery data:", breweryData);
+                                    //console.log("showing brewery data:", breweryData);
                                     res.cookie('sessionId', newSessionInfo.id)
                                     res.send(201, breweryData);
                                  })
@@ -280,7 +281,7 @@ function retrieveLikedBreweries(userId) {
 
             return new Promise(function(resolve, reject) {
 
-               console.log("showing id:", breweries[index].id);
+               //console.log("showing id:", breweries[index].id);
                var url = 'http://api.brewerydb.com/v2/brewery/' + breweries[index].id + '/?key=da506aecce47e548b1877f8c6f9be793'
 
                request(url, function(error, response, body) {
@@ -337,7 +338,7 @@ function includeBreweryLikes(companies) {
       return db('breweries').select('*').where('id', '=', company.brewery.id)
          .then(function(rows) {
 
-            console.log("showing rows:", rows);
+            //console.log("showing rows:", rows);
 
             if (rows.length === 0) {
                company.brewery.likes = 0;
@@ -359,13 +360,13 @@ app.get('/logout', function(req, res) {
 });
 
 app.post('/signup', function(req, res) {
-   console.log("received request for sign up!");
+   //console.log("received request for sign up!");
    var username = req.body.username;
    var password = req.body.password;
 
    User.findByUsername(username)
       .then(function(user) {
-         console.log("found by username:", username);
+         //console.log("found by username:", username);
          if (user) {
             res.send(400, 'account already exists!');
          } else {
@@ -374,11 +375,11 @@ app.post('/signup', function(req, res) {
                   password: password
                })
                .then(function(newUserId) {
-                  console.log("inserted new user! :", newUserId);
+                  //console.log("inserted new user! :", newUserId);
                   return Session.create(newUserId);
                })
                .then(function(newSession) {
-                  console.log("showing next session:", newSession);
+                  //console.log("showing next session:", newSession);
                   res.cookie('sessionId', newSession.id).sendStatus(201);
                })
          }
@@ -395,13 +396,13 @@ function getSignedInUser(req, res, next) {
       Session.findById(sessionId)
          .then(function(session) {
             if (!session) {
-               console.log("invalid session")
+               //console.log("invalid session")
                res.redirect('/login')
             } else {
                return User.findById(session.user_id)
                   .then(function(user) {
                      if (!user) {
-                        console.log("invalid session (no such user)")
+                        //console.log("invalid session (no such user)")
                         res.redirect('/login')
                      } else {
                         req.user = user

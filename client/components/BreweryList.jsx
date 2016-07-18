@@ -30,6 +30,7 @@ export default class BreweryList extends React.Component {
         breweryView = null;
         $("body").removeClass("modal-open");
       } else {
+        console.log('company~~~~~~',company)
         breweryView = <BreweryView
                 company={company}
                 closeView={this.closeView.bind(this)} 
@@ -49,6 +50,7 @@ export default class BreweryList extends React.Component {
    _createBreweryView() {
     if (this.props.brewerys) {
       return this.props.brewerys.map((beer, index) => {
+        //console.log('likes in brewerylist~~~~~' , beer)
         return <BreweryItem 
           likes={beer.brewery.likes}
           key={index}
