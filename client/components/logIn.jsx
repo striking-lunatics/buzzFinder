@@ -34,7 +34,7 @@ export default class Login extends React.Component {
 
             <form>
                <input className='input-large form-control' value={this.state.username} placeholder="Username..." onChange={(e) => this.setState({username: e.target.value})}/>
-               <input className='input-large form-control' value={this.state.password} placeholder='Password...' onChange={(e) => this.setState({password: e.target.value})}/> 
+               <input className='input-large form-control' type="password" value={this.state.password} placeholder='Password...' onChange={(e) => this.setState({password: e.target.value})}/> 
                {/*uN:{this.state.username}*/}
                {/*pW:{this.state.password}*/}
 
