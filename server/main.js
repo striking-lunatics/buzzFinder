@@ -14,23 +14,12 @@ const LOCATION = {
    lat: null,
    long: null
 };
-//  Haversine formula
-function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
-   var R = 6371; // Radius of the earth in km
-   var dLat = deg2rad(lat2 - lat1); // deg2rad below
-   var dLon = deg2rad(lon2 - lon1);
-   var a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-      Math.sin(dLon / 2) * Math.sin(dLon / 2);
-   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-   var d = R * c; // Distance in km
-   return d;
-}
 
-function deg2rad(deg) {
-   return deg * (Math.PI / 180)
-}
+/*
+ * The main server file.  This file listens for enpoint calls from 
+ * the front end and will make api calls and/or database 
+ * retrievals or insertions when necessary.
+ */
 
 app.use(express.static(path.join(__dirname, "../client/public")));
 
@@ -61,6 +50,26 @@ app.use(function(req, res, next) {
    next();
 });
 
+//  Haversine formula
+function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+   var R = 6371; // Radius of the earth in km
+   var dLat = deg2rad(lat2 - lat1); // deg2rad below
+   var dLon = deg2rad(lon2 - lon1);
+   var a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+   var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+   var d = R * c; // Distance in km
+   return d;
+}
+
+function deg2rad(deg) {
+   return deg * (Math.PI / 180)
+}
+
+// This endpoint will receive geographical coordinates from the front-end and 
+// return all breweries in a certain radius.
 app.post('/location', function(req, res) {
 
    //console.log(req.body.latitude, req.body.longitude)
@@ -93,6 +102,7 @@ app.post('/location', function(req, res) {
    })
 });
 
+// This endpoint will show all beers that a brewery contains.
 app.post('/brewery/beer', function(req, res) {
 
    const breweryID = req.body.breweryId
@@ -112,6 +122,8 @@ app.post('/brewery/beer', function(req, res) {
    })
 });
 
+// This endpoint will show all breweries that stock a certain type of beer.
+// Not utilized in our app.
 app.post('/beer/brewery', function(req, res) {
 
    const beerID = req.body.beerId
@@ -134,6 +146,7 @@ app.post('/beer/brewery', function(req, res) {
 
 // get location on run
 fetchLocation();
+
 
 function fetchLocation() {
    // fetchLocation
@@ -271,7 +284,6 @@ app.post('/login', function(req, res) {
 //Helper function called at the end of app.post('/login').
 //Upon a successful login it retrieves ids of the user's previously liked breweries and then
 //does api calls for each one, returning an array of promised brewery data
-
 function retrieveLikedBreweries(userId) {
 
    return Brewery.getLikedBreweries(userId)
@@ -350,6 +362,9 @@ function includeBreweryLikes(companies) {
    })
    return Promise.all(breweriesWithLikes);
 }
+
+// The next three functions can sign someone up, check a users credentials when
+// trying to sign in, and log someone out. 
 
 app.get('/logout', function(req, res) {
    Session.destroy(req.cookies.sessionId)
