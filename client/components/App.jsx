@@ -41,6 +41,17 @@ export default class App extends React.Component {
       });
    }
 
+    _logOut() {
+      $.ajax({
+         url: '/logout',
+         type: 'GET',
+         contentType: 'application/json',
+         success: function(res){
+            console.log('success', res)
+         }
+      });
+   }
+
    _requestLocation() {
       const options = {
          enableHighAccuracy: false,
@@ -93,6 +104,16 @@ export default class App extends React.Component {
    render() {
       return (
          <div className="container App">
+         {document.cookie ? 
+            <div className="row">
+               <div className='col-sm-7 col-sm-offset-5 heading'>
+                  <div className='col-sm-8'>
+                     <h1>Local Craft Brews</h1>
+                     <h4>The Only Source for Craft Beer</h4>
+                  </div>
+                <button type='button' className='btn btn-primary btn-lg'   onClick={(e)=> this._logOut()}>Logout</button>
+               </div>
+            </div> : 
             <div className="row">
                <div className='col-sm-7 col-sm-offset-5 heading'>
                   <div className='col-sm-8'>
@@ -102,6 +123,7 @@ export default class App extends React.Component {
                   <AuthButton/>
                </div>
             </div>
+         }
             <div className='row'>
                <div className='col-sm-7 col-sm-offset-5'>
                   {/*{ Create search box and add two-way bindings }*/}
