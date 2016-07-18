@@ -12,9 +12,13 @@ export default class App extends React.Component {
          cityState: '',
          brewerys: null,
          latitude: 0,
-         longitude: 0
+         longitude: 0,
+         showLoader: false
       }
+   }
 
+   componentDidMount() {
+      this._getLocation()
    }
 
    _getLocation() {
@@ -82,6 +86,10 @@ export default class App extends React.Component {
          this._searchByCity();
       }
 
+   _showLoader() {
+      this.setState({showLoader: true})
+   }
+
    render() {
       return (
          <div className="container App">
@@ -108,11 +116,13 @@ export default class App extends React.Component {
                            Search
                         </button>
                         {/*here is our state (test): {this.state.city}*/}
-                        <button type='button' className='btn btn-primary' onClick={() => this._getLocation()}>Use current location</button>
+                        <button type='button' className='btn btn-primary' onClick={() => {
+                           this._getLocation()
+                        }}>Update current location</button>
                      </div>
                   </form>
                   {/*pass App state to BreweryList*/}
-                  <BreweryList brewerys={this.state.brewerys}/>
+                  <BreweryList brewerys={this.state.brewerys} showState={this.state.showLoader}/>
                </div>
             </div>
          </div>
