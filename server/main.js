@@ -77,7 +77,6 @@ app.post('/location', function(req, res) {
          var parsedBody = JSON.parse(body);
          // console.log("showing results for nearby radius:", parsedBody.data);
          // console.log()
-         res.send(parsedBody);
          includeBreweryLikes(parsedBody.data)
             .then(function(breweriesWithLikes) {
                console.log("showing breweries after likes added:", breweriesWithLikes);
