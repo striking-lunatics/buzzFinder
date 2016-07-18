@@ -3,8 +3,7 @@ import {Button, Modal} from 'react-bootstrap';
 import BeerList from './BeerList.jsx';
 import $ from 'jquery'
 
-export default class BreweryView extends React.Component { 
-
+export default class BreweryView extends React.Component {
 
   _like(breweryId) {
       $.ajax({
@@ -38,15 +37,15 @@ export default class BreweryView extends React.Component {
                </Modal.Header>
                <Modal.Body>
                   <a href={this.props.company.brewery.url} target='_blank'>
-                     <img className='center-block img-circle' 
+                     <img className='center-block img-circle'
                      	src={this.props.company.brewery.images? this.props.company.brewery.images.squareMedium : 'http://www.frenchtoastsunday.com/wp-content/uploads/2015/02/beer-icon.png'} alt={this.props.company.brewery.name}/>
-                     
+
                   </a>
                   <h4> Description </h4>
                   <div className='description'>
                     {this.props.company.brewery.description || 'No description'}
                   </div>
-
+                  <BeerList company={this.props.company}/>
                   {/* <BeerList breweryID={this.props.id}/> */}
 
                   {/*<BeerList beers={self.state.beers}/>*/}

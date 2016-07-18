@@ -12,9 +12,13 @@ export default class App extends React.Component {
          cityState: '',
          brewerys: null,
          latitude: 0,
-         longitude: 0
+         longitude: 0,
+         showLoader: false
       }
+   }
 
+   componentDidMount() {
+      this._getLocation()
    }
 
    _getLocation() {
@@ -34,6 +38,21 @@ export default class App extends React.Component {
          data: JSON.stringify({cityState: this.state.cityState}),
          dataType: 'json',
          success: this._fetchBrewerysByLocation.bind(this)
+      });
+   }
+
+    _logOut() {
+      $.ajax({
+         url: '/logout',
+         type: 'GET',
+         contentType: 'application/json',
+         success: function(res){
+            console.log('success', res)
+         },
+         error: function(err){
+            alert('You have logged out!')
+            {document.location.reload()}
+         }
       });
    }
 
@@ -82,9 +101,23 @@ export default class App extends React.Component {
          this._searchByCity();
       }
 
+   _showLoader() {
+      this.setState({showLoader: true})
+   }
+
    render() {
       return (
          <div className="container App">
+         {document.cookie ? 
+            <div className="row">
+               <div className='col-sm-7 col-sm-offset-5 heading'>
+                  <div className='col-sm-8'>
+                     <h1>Local Craft Brews</h1>
+                     <h4>The Only Source for Craft Beer</h4>
+                  </div>
+                <button type='button' className='btn btn-primary btn-lg'   onClick={(e)=> this._logOut()}>Logout</button>
+               </div>
+            </div> : 
             <div className="row">
                <div className='col-sm-7 col-sm-offset-5 heading'>
                   <div className='col-sm-8'>
@@ -94,6 +127,7 @@ export default class App extends React.Component {
                   <AuthButton/>
                </div>
             </div>
+         }
             <div className='row'>
                <div className='col-sm-7 col-sm-offset-5'>
                   {/*{ Create search box and add two-way bindings }*/}
@@ -108,11 +142,13 @@ export default class App extends React.Component {
                            Search
                         </button>
                         {/*here is our state (test): {this.state.city}*/}
-                        <button type='button' className='btn btn-primary' onClick={() => this._getLocation()}>Use current location</button>
+                        <button type='button' className='btn btn-primary' onClick={() => {
+                           this._getLocation()
+                        }}>Update current location</button>
                      </div>
                   </form>
                   {/*pass App state to BreweryList*/}
-                  <BreweryList brewerys={this.state.brewerys}/>
+                  <BreweryList brewerys={this.state.brewerys} showState={this.state.showLoader}/>
                </div>
             </div>
          </div>
