@@ -129,6 +129,11 @@ form {
 .pull-right{
     margin-left: 10px;
 }
+.disabled {
+  opacity: 0.2;
+  color: #ffffff;
+  cursor: not-allowed;
+}
 /***************/
 /***************/
 /* Loading animation */
