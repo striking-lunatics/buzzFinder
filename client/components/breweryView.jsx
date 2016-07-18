@@ -6,20 +6,30 @@ import $ from 'jquery'
 export default class BreweryView extends React.Component {
 
     // Make this ajax call when users like a brewery 
+   constructor(props) {
+      super(props);
+   }
+
    _like(breweryId) {
-      $.ajax({
-         url: '/brewery/like',
-         type: 'POST',
-         contentType: 'application/json',
-         data: JSON.stringify({breweryId: breweryId}),
-         dataType: 'json',
-         success: function(data) {
-            console.log("brewery successfully liked:", data);
-         },
-         error: function(err) {
-            console.log('error:', err);
-         }
-      });
+      if (document.cookie != '') {
+         $.ajax({
+            url: '/brewery/like',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({breweryId: breweryId}),
+            dataType: 'json',
+            success: function(data) {
+               console.log("brewery successfully liked:", data);
+               console.log('this is ~~~~', this)
+
+            },
+            error: function(err) {
+               console.log('error:', err);
+            }
+         });
+      } else {
+         console.log('You need to log in to like a brewery')
+      }
    }
 
    render() {
@@ -61,10 +71,13 @@ export default class BreweryView extends React.Component {
                      <button type='button' className='btn btn-primary' onClick={this.props.prevView}>
                         &larr; Prev
                      </button>
+
                   {/* This like button is not fully functional: users can like it but cannot unlike it. Also need to disable the button after the users have liked it */}
-                     <button type='button' className='btn btn-primary heart' onClick={(e) => this._like(this.props.company.brewery.id)}>
-                        &hearts;
-                     </button>
+                     {(document.cookie)
+                        ? <button type='button' className='btn btn-primary heart' onClick={(e) => this._like(this.props.company.brewery.id)}>
+                              &hearts;
+                           </button>
+                        : null}
                      <button type='button' className='btn btn-primary' onClick={this.props.nextView}>
                         Next &rarr;
                      </button>
