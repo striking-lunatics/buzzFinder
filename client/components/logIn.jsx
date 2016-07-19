@@ -24,11 +24,11 @@ export default class Login extends React.Component {
             {
                document.location.reload()
             }
-            //console.log("saved user likes returned from login:", data);
+            // console.log("saved user likes returned from login:", data);
          },
          error: function(err) {
             alert('Username or password incorrect! Login failed!')
-            //console.log('error:', err);
+            // console.log('error:', err);
          }
       });
    }
