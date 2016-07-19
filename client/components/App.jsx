@@ -13,7 +13,9 @@ export default class App extends React.Component {
          brewerys: null,
          latitude: 0,
          longitude: 0,
-         showLoader: false
+         showLoader: false,
+         loggedIn: false,
+         userBreweries: []
       }
    }
 
@@ -41,14 +43,26 @@ export default class App extends React.Component {
       });
    }
 
-    _logOut() {
+   _getUserBreweries(retrievedBreweries) { 
+    
+    this.setState({
+      userBreweries: retrievedBreweries,
+      loggedIn: true
+    }) 
+
+    
+   }
+
+    _logOut() { 
+      var self = this;
       $.ajax({
          url: '/logout',
          type: 'GET',
          contentType: 'application/json',
          success: function(res){
             console.log('success', res)
-            {document.location.reload()}
+            self.setState({loggedIn: false});
+            // {document.location.reload()}
          },
          error: function(err){
             alert('error!', err);
@@ -98,7 +112,7 @@ export default class App extends React.Component {
    render() {
       return (
          <div className="container App">
-         {document.cookie ? 
+         {this.state.loggedIn ? 
             <div className="row">
                <div className='col-sm-7 col-sm-offset-5 heading'>
                   <div className='col-sm-8'>
@@ -114,7 +128,7 @@ export default class App extends React.Component {
                      <h1>Local Craft Brews</h1>
                      <h4>The Only Source for Craft Beer</h4>
                   </div>
-                  <AuthButton/>
+                  <AuthButton getUserBreweries={this._getUserBreweries.bind(this)}/>
                </div>
             </div>
          }
