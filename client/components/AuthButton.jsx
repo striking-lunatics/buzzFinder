@@ -11,11 +11,13 @@ export default class AuthButton extends React.Component {
       this.state = {
          show: false
       };
+      // this.getUserBreweries = this.props.getUserBreweries;
    }
 
    render() {
 
-      let close = () => this.setState({show: false});
+      let close = () => this.setState({show: false}); 
+      console.log("inside authbutton", this.props.getUserBreweries)
 
       return (
          <div className="modal-container col-sm-4">
@@ -29,7 +31,7 @@ export default class AuthButton extends React.Component {
                   <Modal.Title id="contained-modal-title">Login</Modal.Title>
                </Modal.Header>
                <Modal.Body>
-                  <Login/>
+                  <Login getUserBreweries={this.props.getUserBreweries}/>
                   <SignUp closeLoginPanel= {() => this.setState({ show: false})}/>
                </Modal.Body>
                <Modal.Footer>
@@ -58,7 +60,7 @@ class SignUp extends React.Component {
             <div className='row'>
                <div className='col-sm-12'>
                   <h5>
-                     Don't have an account?
+                     Dont have an account?
                   </h5>
                   <button type='button' className='btn btn-primary' onClick={() => {
                      {/*Nice to have: want to close login panel when signup form shows up*/

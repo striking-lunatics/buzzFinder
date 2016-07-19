@@ -11,8 +11,13 @@ export default class Login extends React.Component {
       };
    }
 
+   // setCallback() {
+
+   //  this.props.getUserBreweries
+   // }
+
    // Make this ajax call when users click on login button
-   _logIn(attrs) {
+   _logIn(attrs, callback) {
       $.ajax({
          url: '/login',
          type: 'POST',
@@ -21,10 +26,11 @@ export default class Login extends React.Component {
          dataType: 'json',
          success: function(data) {
             alert('You have logged in!')
-            {
-               document.location.reload()
-            }
-            // console.log("saved user likes returned from login:", data);
+          
+           callback(data);
+        
+      
+
          },
          error: function(err) {
             alert('Username or password incorrect! Login failed!')
@@ -33,6 +39,7 @@ export default class Login extends React.Component {
       });
    }
    render() {
+      console.log("inside render in login:", this.props.getUserBreweries);
       return (
          <div>
 
@@ -40,7 +47,7 @@ export default class Login extends React.Component {
                <input className='input-large form-control' value={this.state.username} placeholder="Username..." onChange={(e) => this.setState({username: e.target.value})}/>
                <input className='input-large form-control' type="password" value={this.state.password} placeholder='Password...' onChange={(e) => this.setState({password: e.target.value})}/> 
 
-               <button onClick={(e) => this._logIn({username: this.state.username, password: this.state.password})} type='button' className='btn btn-primary'>Submit</button>
+               <button onClick={(e) => this._logIn({username: this.state.username, password: this.state.password}, this.props.getUserBreweries)} type='button' className='btn btn-primary'>Submit</button>
             </form>
          </div>
       );
