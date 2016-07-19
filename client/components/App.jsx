@@ -48,10 +48,11 @@ export default class App extends React.Component {
          contentType: 'application/json',
          success: function(res){
             console.log('success', res)
+            {document.location.reload()}
          },
          error: function(err){
-            alert('You have logged out!')
-            {document.location.reload()}
+            alert('error!', err);
+            
          }
       });
    }
