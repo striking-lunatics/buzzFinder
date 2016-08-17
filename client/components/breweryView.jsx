@@ -2,6 +2,7 @@ import React from 'react';
 import {Button, Modal} from 'react-bootstrap';
 import BeerList from './BeerList.jsx';
 import $ from 'jquery'
+//
 
 export default class BreweryView extends React.Component {
 
