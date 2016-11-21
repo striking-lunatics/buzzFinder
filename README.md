@@ -4,8 +4,8 @@ Watch 30-second [demo] (https://www.youtube.com/watch?v=6SVX3OjDIrk).
 This is an application that helps you find great local beers and breweries!
 
 <p align="center">
-  <img src="buzz01.jpg" alt="landing" width="600"/>
-  <img src="Buzz02.jpg" alt="details" width="600"/>
+  <img src="http://imgur.com/PSXi7bu.jpg" alt="landing" width="600"/>
+  <img src="http://imgur.com/LiBw4kU.jpg" alt="details" width="600"/>
 </p>
 
 Either search through a list breweries near you, or search breweries by city and state.   
